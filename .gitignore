@@ -4,3 +4,24 @@ app/migrations/*
 
 #Python cache in folder project
 hospitalMS/__pycache__/*
+
+# Ignore build output
+build/
+
+# Ignore object files
+*.o
+
+# Ignore executables
+*.exe
+*.out
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+
+
+*.pyc
