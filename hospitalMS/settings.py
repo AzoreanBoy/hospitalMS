@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #Third party apps
     "tailwind",
     "theme",
+    'django_browser_reload',
     
     #My apps
     'app',
@@ -54,6 +55,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
+    #Third Party Apps
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "hospitalMS.urls"
