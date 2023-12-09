@@ -5,6 +5,8 @@ app/migrations/*
 
 #Python cache in folder project
 hospitalMS/__pycache__/*
+hospitalMS/__pycache__/*.cpython-39.pyc
+*.cpython-39.pyc
 
 # Ignore build output
 build/
