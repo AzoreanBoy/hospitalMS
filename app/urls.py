@@ -12,6 +12,7 @@ urlpatterns = [
     path("login/",views.loginUser, name="login"),
     path("logout/", views.logoutUser, name="logout"),
     
+    #Lists of the Entities in the DB
     path('patients/', views.patients, name ='patients'),
     path('admissions/',views.admissions, name = 'admissions'),
     path('prescriptions/', views.prescriptions, name='prescriptions'),
