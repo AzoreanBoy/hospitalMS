@@ -135,7 +135,6 @@ class Prescription(models.Model):
         managed = False
         db_table = 'prescription'
 
-
 class PrescriptionMedication(models.Model):
     dosage = models.CharField(max_length=512, blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
