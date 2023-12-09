@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from .models import *
+
 from .decorators import *
 
 # Create your views here.
@@ -38,3 +40,25 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('landing')
+
+#Lists
+def admissions(request):
+    admissions = Admission.objects.all()
+    return HttpResponse("Admissões")
+
+def patients(request):
+    patients = Patient.objects.all()
+    return render(request, 'patients.html', {
+        'patients' : patients
+    })
+
+def physicians(request):
+    physicians = Physician.objects.all()
+    return HttpResponse("Physicians")
+
+
+def prescriptions(request):
+    prescriptions = Prescription.objects.all()
+    pm = PrescriptionMedication.objects.all()
+    medicaments = Medication.objects.all()
+    return HttpResponse("Prescriptions")
