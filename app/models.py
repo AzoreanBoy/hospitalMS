@@ -8,6 +8,9 @@ class Speciality(models.Model):
     class Meta:
         managed = False
         db_table = 'speciality'
+    
+    def __str__(self):
+        return self.name
 
 class Department(models.Model):
     id = models.AutoField(primary_key=True)
@@ -16,6 +19,9 @@ class Department(models.Model):
     class Meta:
         managed = False
         db_table = 'department'
+    
+    def __str__(self):
+        return self.name
 
 class Medication(models.Model):
     code = models.AutoField(primary_key=True)
@@ -24,6 +30,9 @@ class Medication(models.Model):
     class Meta:
         managed = False
         db_table = 'medication'
+    
+    def __str__(self):
+        return self.name
 
 class ExamsCode(models.Model):
     code = models.AutoField(primary_key=True)
@@ -32,6 +41,9 @@ class ExamsCode(models.Model):
     class Meta:
         managed = False
         db_table = 'exams_code'
+    
+    def __str__(self):
+        return self.description
 
 class DiagnosisCode(models.Model):
     id = models.AutoField(primary_key=True)
@@ -40,6 +52,9 @@ class DiagnosisCode(models.Model):
     class Meta:
         managed = False
         db_table = 'diagnosis_code'
+    
+    def __str__(self):
+        return self.description
 
 
 # Relational Models
@@ -61,6 +76,9 @@ class Patient(models.Model):
     class Meta:
         managed = False
         db_table = 'patient'
+    
+    def __str__(self):
+        return f"{self.person_id_card_number} -> {self.person_name}"
 
 class Physician(models.Model):
     class SEX(models.TextChoices):
@@ -81,6 +99,9 @@ class Physician(models.Model):
     class Meta:
         managed = False
         db_table = 'physician'
+    
+    def __str__(self):
+        return f"{self.person_id_card_number} - Doctor {self.person_name}"
 
 class Admission(models.Model):
     id =  models.AutoField(primary_key=True)
@@ -91,6 +112,9 @@ class Admission(models.Model):
     class Meta:
         managed = False
         db_table = 'admission'
+    
+    def __str__(self):
+        return f"{self.adm_date} - {self.patient}"
 
 class AdmissionPhysician(models.Model):
     admission = models.ForeignKey(Admission, models.DO_NOTHING)
@@ -100,6 +124,9 @@ class AdmissionPhysician(models.Model):
         managed = False
         db_table = 'admission_physician'
         unique_together = (('admission', 'physician'),)
+    
+    def __str__(self):
+        return f" {self.admission} - {self.physician}"
 
 class Diagnosis(models.Model):
     comment = models.TextField(blank=True, null=True)
@@ -112,6 +139,9 @@ class Diagnosis(models.Model):
         managed = False
         db_table = 'diagnosis'
         unique_together = (('diagnosis_date', 'diagnosis_code', 'admission'),)
+    
+    def __str__(self):
+        return f"Admission {self.diagnosis} of {self.diagnosis_date} by {self.physician}"
 
 class Exam(models.Model):
     prescription_date = models.DateField(null=False, auto_now_add=True)
@@ -125,6 +155,9 @@ class Exam(models.Model):
         managed = False
         db_table = 'exam'
         unique_together = (('exam_date', 'exams_code'),)
+    
+    def __str__(self):
+        return f"Exam {self.exams_code} of {self.prescription_date} for admission {self.admission}"
 
 class Prescription(models.Model):
     id = models.AutoField(primary_key=True)
