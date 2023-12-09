@@ -48,6 +48,7 @@ def admissions(request):
 
 def patients(request):
     patients = Patient.objects.all()
+    return HttpResponse("Patients")
     return render(request, 'patients.html', {
         'patients' : patients
     })
@@ -62,3 +63,9 @@ def prescriptions(request):
     pm = PrescriptionMedication.objects.all()
     medicaments = Medication.objects.all()
     return HttpResponse("Prescriptions")
+
+def exams(request):
+    return HttpResponse("Exams")
+
+def diagnosis(request):
+    return HttpResponse("Diagnosis")
