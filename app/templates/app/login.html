@@ -2,66 +2,66 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <meta http-equiv="X-UA-Compatible" content="IE=e dge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hospitalMS</title>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Open+Sans"/>
-    <style>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta http-equiv="X-UA-Compatible" content="IE=e dge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>hospitalMS</title>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Open+Sans" />
+        <style>
       body {
-        font-family: "Open Sans", sans-serif;
+        font-family: 'Open Sans', sans-serif;
       }
-    </style>
-    {% tailwind_css %}
-  </head>
-  <body class="bg-zinc-800">
-    <div class="container flex flex-col border-blue-600 border-4 rounded-2xl max-w-screen-md mx-auto my-20 p-16 items-center">
-      <h2 class="font-mono text-7xl text-white mb-5">HospitalMS</h2>
-      {% comment %} Login Form {% endcomment %}
-      <div class="w-full max-w-md border-b-2 border-zinc-500">
-        <form type="POST" class="px-8 pt-6 pb-8 -mb-3" name="login">
-          {% csrf_token %}
-          <div class="mb-4">
-            <label class="block text-white text-sm font-bold mb-2" for="username">Username</label>
-            <input class="shadow appearance-none rounded bg-zinc-900 w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                   id="username"
-                   type="text"
-                   placeholder="Username"
-                   name="usernamelogin"/>
-          </div>
-          <div class="mb-6">
-            <label class="block text-white text-sm font-bold mb-2" for="password">Password</label>
-            <input class="shadow appearance-none rounded bg-zinc-900 w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                   id="password"
-                   type="password"
-                   placeholder="******************"
-                   name="password"/>
-          </div>
-          <div class="flex items-center justify-center">
-            <button type="submit"
-                    formmethod="post"
-                    class="bg-zinc-700 hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-              Login
-            </button>
-          </div>
-        </form>
-        {% comment %} FLASH MESSAGES {% endcomment %}
-        {% for message in messages %}
-          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-            <div class="w-full p-3 rounded-2xl bg-zinc-900 font-bold text-red-600 mb-3">
-              <p>{{ message }}</p>
+        </style>
+        {% tailwind_css %}
+    </head>
+    <body class="bg-zinc-800">
+        <div class="container flex flex-col border-blue-600 border-4 rounded-2xl max-w-screen-md mx-auto my-20 p-16 items-center">
+            <h2 class="font-mono text-7xl text-white mb-5">HospitalMS</h2>
+            {% comment %}Login Form{% endcomment %}
+            <div class="w-full max-w-md border-b-2 border-zinc-500">
+                <form type="POST" class="px-8 pt-6 pb-8 -mb-3" name="login">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-bold mb-2" for="username">Username</label>
+                        <input class="shadow appearance-none rounded bg-zinc-900 w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                               id="username"
+                               type="text"
+                               placeholder="Username"
+                               name="usernamelogin" />
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-white text-sm font-bold mb-2" for="password">Password</label>
+                        <input class="shadow appearance-none rounded bg-zinc-900 w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                               id="password"
+                               type="password"
+                               placeholder="******************"
+                               name="password" />
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button type="submit"
+                                formmethod="post"
+                                class="bg-zinc-700 hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Login
+                        </button>
+                    </div>
+                </form>
+                {% comment %}FLASH MESSAGES{% endcomment %}
+                {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <div class="w-full p-3 rounded-2xl bg-zinc-900 font-bold text-red-600 mb-3">
+                            <p>{{ message }}</p>
+                        </div>
+                    {% else %}
+                        <div class="w-full p-3 rounded-2xl bg-zinc-900 font-bold text-white mb-3 text-center">
+                            <p>{{ message }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-          {% else %}
-            <div class="w-full p-3 rounded-2xl bg-zinc-900 font-bold text-white mb-3 text-center">
-              <p>{{ message }}</p>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </body>
+        </div>
+    </body>
 </html>

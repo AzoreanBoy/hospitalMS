@@ -28,7 +28,7 @@ def loginUser(request):
         pa = request.POST["password"]
 
         user = authenticate(request, username=us, password=pa)
-        
+
         if user is not None:
             print("User is not none")
             login(request, user)
@@ -37,21 +37,22 @@ def loginUser(request):
             messages.warning(request, "Username or password are incorrect.")
     return render(request, "app/login.html")
 
+
 def logoutUser(request):
     logout(request)
-    return redirect('landing')
+    return redirect("landing")
 
-#Lists
+
+# Lists
 def admissions(request):
     admissions = Admission.objects.all()
     return HttpResponse("Admissões")
 
+
 def patients(request):
     patients = Patient.objects.all()
-    return HttpResponse("Patients")
-    return render(request, 'patients.html', {
-        'patients' : patients
-    })
+    return render(request, "app/patients.html", {"patients": patients})
+
 
 def physicians(request):
     physicians = Physician.objects.all()
@@ -64,8 +65,10 @@ def prescriptions(request):
     medicaments = Medication.objects.all()
     return HttpResponse("Prescriptions")
 
+
 def exams(request):
     return HttpResponse("Exams")
+
 
 def diagnosis(request):
     return HttpResponse("Diagnosis")

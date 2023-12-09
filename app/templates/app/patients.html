@@ -1,0 +1,15 @@
+{% extends "app/index.html" %}
+{% block content %}
+<section>
+  <div>
+    {% for pat in patients %}
+      <div class="flex justify-center space-x-10">
+        <p class="font-bold text-lg">{{pat.person_id_card_number}}</p>
+        <div class="text-lg">
+          {{pat.person_name}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}
