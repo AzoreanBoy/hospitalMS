@@ -167,6 +167,9 @@ class Prescription(models.Model):
     class Meta:
         managed = False
         db_table = 'prescription'
+    
+    def __str__(self):
+        return f"{self.prescription_date} - {self.admission}"
 
 class PrescriptionMedication(models.Model):
     dosage = models.CharField(max_length=512, blank=True, null=True)
@@ -178,3 +181,6 @@ class PrescriptionMedication(models.Model):
         managed = False
         db_table = 'prescription_medication'
         unique_together = (('medication_code', 'prescription'),)
+    
+    def __str__(self):
+        return f"{self.prescription} - {self.medication_code}"
