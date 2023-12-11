@@ -77,7 +77,31 @@ def diagnosis(request):
 
 
 def addPatient(request):
-    form = NewPatientForm()
+    form = NewPatientForm
+    if request.method == "POST":
+        form = NewPatientForm(request.POST)
+        
+        print(request.POST['person_adress'])
+        
+        
+        if form.is_valid():
+            print("Formulário Válido")
+            patient = Patient(person_id_card_number=request.POST['person_id_card_number'],
+                              person_healthcare_number = request.POST['person_healthcare_number'],
+                              person_adress = request.POST['person_adress'],
+                              person_phone_number = request.POST['person_phone_number'],
+                              person_name = request.POST['person_name'],
+                              person_birth_date = request.POST['birthdate'],
+                              person_sex = request.POST['sex'])
+            
+            print(patient)
+            patient.save()
+            messages.success(request, "New Patient Created")
+                    
+        else:
+            print(form.errors)
+            messages.error(request,form.errors)
+        
     return render(request, "app/addpatient.html",{
-        "form":form
+        "form":NewPatientForm
     })

@@ -1,31 +1,55 @@
 {% extends 'app/index.html' %}
 {% block content %}
   <section>
-    <div class="mx-16 mt-10 flex">
-      <form action="POST" class="flex-col items-start">
+    <div class="mx-16 mt-10">
+      <form name="addPatient" class="flex flex-wrap w-full" method="POST">
         {% csrf_token %}
-        <div class="flex-row m-5">
+        <div class="flex-row m-5 w-full">
           <label class="mr-5 font-bold">Name</label>
           {{ form.person_name }}
         </div>
 
-        <div class="flex-row m-5 group">
-          <label for="birth_date" class="mr-5 font-bold">Birth Date</label>
-          <input type="date" class="rounded-lg" />
+        <div class="flex-row m-5">
+          <label for="birth_date" class="mr-2 font-bold">Birth Date</label>
+          <input type="date" class="rounded-lg border-2" name="birthdate" required="True" />
         </div>
 
-        <div class="flex-row m-5 group">
-          <label class="mr-5 font-bold">Sex</label>
-          <select name="sex" id="sex" class="rounded-lg">
+        <div class="flex-row m-5">
+          <label class="mr-2 font-bold">Sex</label>
+          <select name="sex" id="sex" class="rounded-lg border-2">
             <option value="m">Male</option>
             <option value="f">Female</option>
           </select>
         </div>
 
-        <div class="flex-row m-5 gorup">
-          <label class="mr-5 font-bold">ID Card Number</label>
-          {{ form.person_id_card_number }}
+        <div class="m-5 flex-row">
+          <label class="font-bold mr-2">Adress</label>
+          {{ form.person_adress }}
         </div>
+
+        <div class="m-5">
+          <label class="mr-2 font-bold">Nationality</label>
+          {{ form.person_nacionality }}
+        </div>
+
+        <div class="m-5 flex-row">
+          <label class="mr-2 font-bold">Contact</label>
+          {{ form.person_phone_number }}
+        </div>
+
+        <div class="w-full flex">
+          <div class="flex-row m-5 group">
+            <label class="mr-5 font-bold">ID Card Number</label>
+            {{ form.person_id_card_number }}
+          </div>
+
+          <div class="flex-col m-5 group">
+            <label for="" class="mr-5 font-bold">Healthcare Number</label>
+            {{ form.person_healthcare_number }}
+          </div>
+        </div>
+
+        <button type="submit" class="shadow border-2 border-violet-700 px-5 py-2 m-5 mt-16 w-full rounded-lg bg-violet-200 hover:bg-violet-700 hover:text-white">Add Patient</button>
       </form>
     </div>
   </section>
