@@ -9,6 +9,8 @@ from .models import *
 
 from .decorators import *
 
+from .forms import NewPatientForm
+
 # Create your views here.
 
 
@@ -72,3 +74,10 @@ def exams(request):
 
 def diagnosis(request):
     return HttpResponse("Diagnosis")
+
+
+def addPatient(request):
+    form = NewPatientForm()
+    return render(request, "app/addpatient.html",{
+        "form":form
+    })

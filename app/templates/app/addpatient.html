@@ -1,0 +1,32 @@
+{% extends 'app/index.html' %}
+{% block content %}
+  <section>
+    <div class="mx-16 mt-10 flex">
+      <form action="POST" class="flex-col items-start">
+        {% csrf_token %}
+        <div class="flex-row m-5">
+          <label class="mr-5 font-bold">Name</label>
+          {{ form.person_name }}
+        </div>
+
+        <div class="flex-row m-5 group">
+          <label for="birth_date" class="mr-5 font-bold">Birth Date</label>
+          <input type="date" class="rounded-lg" />
+        </div>
+
+        <div class="flex-row m-5 group">
+          <label class="mr-5 font-bold">Sex</label>
+          <select name="sex" id="sex" class="rounded-lg">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+        </div>
+
+        <div class="flex-row m-5 gorup">
+          <label class="mr-5 font-bold">ID Card Number</label>
+          {{ form.person_id_card_number }}
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
