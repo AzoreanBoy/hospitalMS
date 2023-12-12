@@ -94,9 +94,11 @@ def addPatient(request):
                               person_birth_date = request.POST['birthdate'],
                               person_sex = request.POST['sex'])
             
-            print(patient)
             patient.save()
-            messages.success(request, "New Patient Created")
+            print(patient)
+            
+            return redirect('patients')
+            
                     
         else:
             print(form.errors)
