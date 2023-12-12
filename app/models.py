@@ -1,12 +1,14 @@
 from django.db import models
 
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+
 # Domains
 class Speciality(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'speciality'
     
     def __str__(self):
@@ -17,7 +19,7 @@ class Department(models.Model):
     name = models.CharField(max_length=256)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'department'
     
     def __str__(self):
@@ -28,7 +30,7 @@ class Medication(models.Model):
     name = models.CharField(max_length=512)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'medication'
     
     def __str__(self):
@@ -39,7 +41,7 @@ class ExamsCode(models.Model):
     description = models.CharField(max_length=512)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'exams_code'
     
     def __str__(self):
@@ -50,7 +52,7 @@ class DiagnosisCode(models.Model):
     description = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'diagnosis_code'
     
     def __str__(self):
@@ -63,22 +65,20 @@ class Patient(models.Model):
         FEMALe = "f"
         MALE = "m"
         
-    
-    person_id_card_number = models.BigIntegerField(primary_key=True)
-    person_healthcare_number = models.IntegerField(blank=True, null=True)
-    person_name = models.CharField(max_length=512, null=False)
-    person_adress = models.CharField(max_length=512, blank=True, null=True)
-    person_phone_number = models.CharField(max_length=9, blank=True, null=False)
-    person_birth_date = models.DateField(null=False)
-    person_nacionality = models.CharField(max_length=50, blank=True, null=True)
-    person_sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default = '-')
+    id_card_number = models.CharField(primary_key=True, max_length=8, validators=[MinLengthValidator(8), MaxLengthValidator(8)])
+    healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)], null=False, blank=False)
+    name = models.CharField(max_length=512, null=False)
+    adress = models.CharField(max_length=512, blank=True, null=True)
+    phone_number = models.CharField(max_length=9, blank=True, null=True)
+    birth_date = models.DateField(null=False, blank=False)
+    nationality = models.CharField(max_length=256, blank=True, null=True)
+    sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default = '-')
 
     class Meta:
-        managed = False
         db_table = 'patient'
     
     def __str__(self):
-        return f"{self.person_id_card_number} -> {self.person_name}"
+        return f"{self.id_card_number} -> {self.name}"
 
 class Physician(models.Model):
     class SEX(models.TextChoices):
@@ -87,100 +87,91 @@ class Physician(models.Model):
     
     speciality = models.ForeignKey(Speciality, on_delete=models.DO_NOTHING, null=False)
     department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=False)
-    person_id_card_number = models.BigIntegerField(primary_key=True)
-    person_healthcare_number = models.IntegerField(blank=True, null=True)
-    person_name = models.CharField(max_length=512, null=False)
-    person_adress = models.CharField(max_length=512, blank=True, null=True)
-    person_phone_number = models.CharField(max_length=9, blank=True, null=True)
-    person_birth_date = models.DateField(null=False)
-    person_nacionality = models.CharField(max_length=50, blank=True, null=True)
-    person_sex = models.CharField(max_length=1, choices=SEX.choices, default='-')
+    id_card_number = models.CharField(primary_key=True, max_length=8, validators=[MinLengthValidator(8), MaxLengthValidator(8)])
+    healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)], null=False, blank=False)
+    name = models.CharField(max_length=512, null=False)
+    adress = models.CharField(max_length=512, blank=True, null=True)
+    phone_number = models.CharField(max_length=9, blank=True, null=True)
+    birth_date = models.DateField(null=False, blank=False)
+    nationality = models.CharField(max_length=256, blank=True, null=True)
+    sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default = '-')
 
     class Meta:
-        managed = False
         db_table = 'physician'
     
     def __str__(self):
-        return f"{self.person_id_card_number} - Doctor {self.person_name}"
+        return f"{self.id_card_number} - Doctor {self.name}"
 
 class Admission(models.Model):
-    id =  models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     adm_date = models.DateField(null=False)
-    urgency = models.BooleanField()
-    patient = models.ForeignKey(Patient, models.DO_NOTHING, db_column='patient_person_id_card_number')
+    urgency = models.BooleanField(null=False)
+    patient = models.ForeignKey(Patient, models.DO_NOTHING)
 
     class Meta:
-        managed = False
         db_table = 'admission'
     
     def __str__(self):
         return f"{self.adm_date} - {self.patient}"
 
-class AdmissionPhysician(models.Model):
+class PhysicianActions(models.Model):
     admission = models.ForeignKey(Admission, models.DO_NOTHING)
-    physician = models.ForeignKey(Physician, models.DO_NOTHING, db_column='physician_person_id_card_number')
+    physician = models.ForeignKey(Physician, models.DO_NOTHING)
+    action = models.TextField()
 
     class Meta:
-        managed = False
-        db_table = 'admission_physician'
         unique_together = (('admission', 'physician'),)
     
     def __str__(self):
-        return f" {self.admission} - {self.physician}"
+        return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
 
 class Diagnosis(models.Model):
+    admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
+    physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
+    date = models.DateField(null=False, auto_now_add=True)
+    diagnosis = models.ForeignKey(DiagnosisCode, models.DO_NOTHING)
     comment = models.TextField(blank=True, null=True)
-    diagnosis_date = models.DateField(null=False, auto_now_add=True)
-    diagnosis_code = models.ForeignKey(DiagnosisCode, models.DO_NOTHING)
-    admission = models.ForeignKey(Admission, models.DO_NOTHING)
-    physician = models.ForeignKey(Physician, models.DO_NOTHING, db_column='physician_person_id_card_number')
 
     class Meta:
-        managed = False
-        db_table = 'diagnosis'
-        unique_together = (('diagnosis_date', 'diagnosis_code', 'admission'),)
+        unique_together = (('date', 'diagnosis', 'admission'),)
     
     def __str__(self):
-        return f"Admission {self.diagnosis} of {self.diagnosis_date} by {self.physician}"
+        return f"Diagnosis {self.diagnosis} on {self.date} by {self.physician.name} related to Patient {self.admission.patient.id_card_number}"
 
 class Exam(models.Model):
+    admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
+    physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
     prescription_date = models.DateField(null=False, auto_now_add=True)
+    exam = models.ForeignKey(ExamsCode, models.DO_NOTHING, null=False)
     exam_date = models.DateField()
     result = models.TextField(blank=True, null=True)
-    exams_code = models.ForeignKey(ExamsCode, models.DO_NOTHING, db_column='exams_code_code')
-    physician = models.ForeignKey(Physician, models.DO_NOTHING, db_column='physician_person_id_card_number')
-    admission = models.ForeignKey(Admission, models.DO_NOTHING)
 
     class Meta:
-        managed = False
         db_table = 'exam'
-        unique_together = (('exam_date', 'exams_code'),)
+        unique_together = (('admission','exam_date', 'exam'),)
     
     def __str__(self):
-        return f"Exam {self.exams_code} of {self.prescription_date} for admission {self.admission}"
+        return f"Exam {self.exam} for patient {self.admission.patient.id_card_number}"
 
 class Prescription(models.Model):
-    id = models.AutoField(primary_key=True)
     prescription_date = models.DateField(null=False, auto_now_add=True)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
+    physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
 
     class Meta:
-        managed = False
         db_table = 'prescription'
     
     def __str__(self):
-        return f"{self.prescription_date} - {self.admission}"
+        return f"{self.prescription_date} - {self.admission.patient.id_card_number} by {self.physician.id_card_number}"
 
 class PrescriptionMedication(models.Model):
+    prescription = models.ForeignKey(Prescription, models.DO_NOTHING)
+    medication = models.ForeignKey(Medication, models.DO_NOTHING)
     dosage = models.CharField(max_length=512, blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
-    medication_code = models.OneToOneField(Medication, models.DO_NOTHING, db_column='medication_code')
-    prescription = models.ForeignKey(Prescription, models.DO_NOTHING)
 
     class Meta:
-        managed = False
-        db_table = 'prescription_medication'
-        unique_together = (('medication_code', 'prescription'),)
+        unique_together = (('medication', 'prescription'),)
     
     def __str__(self):
-        return f"{self.prescription} - {self.medication_code}"
+        return f"{self.prescription} - {self.medication}"

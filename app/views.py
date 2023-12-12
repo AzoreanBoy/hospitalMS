@@ -81,18 +81,19 @@ def addPatient(request):
     if request.method == "POST":
         form = NewPatientForm(request.POST)
         
-        print(request.POST['person_adress'])
+        print(request.POST['adress'])
         
         
         if form.is_valid():
             print("Formulário Válido")
-            patient = Patient(person_id_card_number=request.POST['person_id_card_number'],
-                              person_healthcare_number = request.POST['person_healthcare_number'],
-                              person_adress = request.POST['person_adress'],
-                              person_phone_number = request.POST['person_phone_number'],
-                              person_name = request.POST['person_name'],
-                              person_birth_date = request.POST['birthdate'],
-                              person_sex = request.POST['sex'])
+            patient = Patient(id_card_number=request.POST['id_card_number'],
+                              healthcare_number = request.POST['healthcare_number'],
+                              adress = request.POST['adress'],
+                              phone_number = request.POST['phone_number'],
+                              name = request.POST['name'],
+                              birth_date = request.POST['birthdate'],
+                              sex = request.POST['sex'],
+                              nationality = request.POST['nationality'])
             
             patient.save()
             print(patient)
