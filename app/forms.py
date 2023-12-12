@@ -51,7 +51,7 @@ class NewPatientForm(forms.ModelForm):
             }
         )
 
-        self.fields["person_phone_number"].widget.attrs.update(
+        self.fields["phone_number"].widget.attrs.update(
             {"class": "appearance-none shadow border-2 rounded-lg py-2 px-3 leading-tight",
              'placeholder':"Ex. 911111111"}
         )

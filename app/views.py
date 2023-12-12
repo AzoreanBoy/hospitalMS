@@ -55,26 +55,12 @@ def patients(request):
     patients = Patient.objects.all()
     return render(request, "app/patients.html", {"patients": patients})
 
-
-def physicians(request):
-    physicians = Physician.objects.all()
-    return HttpResponse("Physicians")
-
-
-def prescriptions(request):
-    prescriptions = Prescription.objects.all()
-    pm = PrescriptionMedication.objects.all()
-    medicaments = Medication.objects.all()
-    return HttpResponse("Prescriptions")
-
-
-def exams(request):
-    return HttpResponse("Exams")
-
-
-def diagnosis(request):
-    return HttpResponse("Diagnosis")
-
+def patientdetails(request, pk):
+    patient = Patient.objects.get(id_card_number = pk)
+    print(patient.sex)
+    return render(request,'app/patientdetails.html',{
+        'patient':patient,
+    })
 
 def addPatient(request):
     form = NewPatientForm
@@ -108,3 +94,24 @@ def addPatient(request):
     return render(request, "app/addpatient.html",{
         "form":NewPatientForm
     })
+
+def physicians(request):
+    physicians = Physician.objects.all()
+    return HttpResponse("Physicians")
+
+
+def prescriptions(request):
+    prescriptions = Prescription.objects.all()
+    pm = PrescriptionMedication.objects.all()
+    medicaments = Medication.objects.all()
+    return HttpResponse("Prescriptions")
+
+
+def exams(request):
+    return HttpResponse("Exams")
+
+
+def diagnosis(request):
+    return HttpResponse("Diagnosis")
+
+

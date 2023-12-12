@@ -1,0 +1,46 @@
+{% extends "app/index.html" %}
+{% block content %}
+{% include "app/navparts.html" %}
+<section class="mx-20">
+    <h2 class="mx-8 my-3 font-bold text-2xl ">Patient {{patient.id_card_number}} Details</h2>
+    <h2 class="font-extrabold text-xl mt-10 mb-4">Demographic Details</h2>
+    <div class="mx-8 my-2">
+        <p class="font-bold mr-8">Name</p>
+        {{patient.name}}
+    </div>
+    <div class="mx-8 lg:flex lg:flex-wrap lg:space-x-36">
+        <div class="flex my-2">
+            <p class="font-bold mr-8">Sex</p>
+            {{patient.get_sex}}
+        </div>
+
+        <div class="flex my-2">
+            <p class="font-bold mr-8">Birth Date</p>
+            {{patient.birth_date}}
+        </div>
+
+        <div class="flex my-2">
+            <p class="font-bold mr-8">Nationality</p>
+            {{patient.nationality}}
+        </div>
+
+        <div class="flex my-2">
+            <p class="font-bold mr-8">Healthcare Number</p>
+            {{patient.healthcare_number}}
+        </div>
+    </div>
+    <h2 class="font-extrabold text-xl mt-10 mb-4">Contact Information</h2>
+    <div class="mx-8 lg:flex lg:flex-wrap lg:space-x-36">
+
+        <div class="flex my-2">
+            <p class="font-bold mr-8">Adress</p>
+            {{patient.adress}}
+        </div>
+
+        <div class="flex my-2">
+            <p class="font-bold mr-8">Contact</p>
+            {{patient.phone_number}}
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -20,6 +20,7 @@ urlpatterns = [
     path('exams/', views.exams, name = 'exams'),
     path('diagnosis/', views.diagnosis, name="diagnosis"),
     
-    # ADICIONAR UM PACIENT
+    # PACIENTES
+    path('patientdetails/<str:pk>', views.patientdetails, name = 'patientdetails'),
     path('addpatient/', views.addPatient, name="addPatient"),
 ]
