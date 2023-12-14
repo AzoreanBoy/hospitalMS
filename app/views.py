@@ -97,7 +97,9 @@ def addPatient(request):
 
 def physicians(request):
     physicians = Physician.objects.all()
-    return HttpResponse("Physicians")
+    return render(request, "app/physicians.html", {
+        'physicians' : physicians,
+    })
 
 
 def prescriptions(request):

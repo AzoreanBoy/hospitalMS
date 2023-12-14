@@ -1,9 +1,9 @@
 {% extends 'app/index.html' %}
 {% block content %}
-  {% include 'navparts.html' %}
+  {% include 'app/navparts.html' %}
   <section>
     <div class="flex justify-end">
-      <a href="{% url 'addPatient' %}" class="ring-2 ring-slate-700 rounded-xl px-4 py-2 font-bold mr-10 bg-purple-300">Add Patient</a>
+      <a href="{% url 'addPatient' %}" class="ring-2 ring-slate-700 rounded-xl px-4 py-2 font-bold mr-10 bg-purple-300">Add Physician</a>
     </div>
 
     <div class="mx-40 mt-10 border-4 rounded-xl">
@@ -17,11 +17,11 @@
         </thead>
         <tbody class="">
           <div class="">
-            {% for pat in patients %}
-              <tr class="text-center hover:bg-violet-500" onclick="window.location='{% url 'patientdetails' pat.id_card_number %}'">
-                <th>{{ pat.id_card_number }}</th>
-                <td>{{ pat.name }}</td>
-                <td>{{ pat.birth_date }}</td>
+            {% for doc in physicians %}
+              <tr class="text-center hover:bg-violet-500" onclick="window.location='{% url 'patientdetails' doc.id_card_number %}'">
+                <th>{{ doc.id_card_number }}</th>
+                <td>{{ doc.name }}</td>
+                <td>{{ doc.birth_date }}</td>
               </tr>
             {% endfor %}
           </div>
