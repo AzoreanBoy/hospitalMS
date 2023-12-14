@@ -131,6 +131,12 @@ class Physician(models.Model):
 
     def __str__(self):
         return f"{self.id_card_number} - Doctor {self.name}"
+    
+    def get_sex(self):
+        if self.sex == "m":
+            return "Male"
+        else:
+            return "Female"
 
 
 class Admission(models.Model):

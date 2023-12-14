@@ -1,46 +1,56 @@
-{% extends "app/index.html" %}
+{% extends 'app/index.html' %}
 {% block content %}
-{% include "app/navparts.html" %}
-<section class="mx-20">
-    <h2 class="mx-8 my-3 font-bold text-2xl ">Physician {{doctor.id_card_number}} Details</h2>
+  {% include 'app/navparts.html' %}
+  <section class="mx-20">
+    <h2 class="mx-8 my-3 font-bold text-2xl">Physician {{ doctor.id_card_number }} Details</h2>
     <h2 class="font-extrabold text-xl mt-10 mb-4">Demographic Details</h2>
     <div class="mx-8 my-2">
-        <p class="font-bold mr-8">Name</p>
-        {{doctor.name}}
+      <p class="font-bold mr-8">Name</p>
+      {{ doctor.name }}
     </div>
     <div class="mx-8 lg:flex lg:flex-wrap lg:space-x-36">
-        <div class="flex my-2">
-            <p class="font-bold mr-8">Sex</p>
-            {{doctor.get_sex}}
-        </div>
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Sex</p>
+        {{ doctor.get_sex }}
+      </div>
 
-        <div class="flex my-2">
-            <p class="font-bold mr-8">Birth Date</p>
-            {{doctor.birth_date}}
-        </div>
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Birth Date</p>
+        {{ doctor.birth_date }}
+      </div>
 
-        <div class="flex my-2">
-            <p class="font-bold mr-8">Nationality</p>
-            {{doctor.nationality}}
-        </div>
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Nationality</p>
+        {{ doctor.nationality }}
+      </div>
 
-        <div class="flex my-2">
-            <p class="font-bold mr-8">Healthcare Number</p>
-            {{doctor.healthcare_number}}
-        </div>
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Healthcare Number</p>
+        {{ doctor.healthcare_number }}
+      </div>
     </div>
     <h2 class="font-extrabold text-xl mt-10 mb-4">Contact Information</h2>
     <div class="mx-8 lg:flex lg:flex-wrap lg:space-x-36">
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Adress</p>
+        {{ doctor.adress }}
+      </div>
 
-        <div class="flex my-2">
-            <p class="font-bold mr-8">Adress</p>
-            {{doctor.adress}}
-        </div>
-
-        <div class="flex my-2">
-            <p class="font-bold mr-8">Contact</p>
-            {{doctor.phone_number}}
-        </div>
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Contact</p>
+        {{ doctor.phone_number }}
+      </div>
     </div>
-</section>
-{% endblock content %}
+    <h2 class="font-extrabold text-xl mt-10 mb-4">Medical Details</h2>
+    <div class="mx-8 lg:flex lg:flex-wrap lg:space-x-36">
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Speciality</p>
+        {{ doctor.speciality }}
+      </div>
+      <div class="flex my-2">
+        <p class="font-bold mr-8">Department</p>
+        {{ doctor.department }}
+      </div>
+    </div>
+  </section>
+{% endblock %}
