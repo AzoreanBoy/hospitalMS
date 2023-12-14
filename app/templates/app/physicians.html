@@ -18,7 +18,7 @@
         <tbody class="">
           <div class="">
             {% for doc in physicians %}
-              <tr class="text-center hover:bg-violet-500" onclick="window.location='{% url 'patientdetails' doc.id_card_number %}'">
+              <tr class="text-center hover:bg-violet-500" onclick="window.location='{% url 'physiciandetails' doc.id_card_number %}'">
                 <th>{{ doc.id_card_number }}</th>
                 <td>{{ doc.name }}</td>
                 <td>{{ doc.birth_date }}</td>

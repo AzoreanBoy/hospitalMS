@@ -55,51 +55,71 @@ def patients(request):
     patients = Patient.objects.all()
     return render(request, "app/patients.html", {"patients": patients})
 
+
 def patientdetails(request, pk):
-    patient = Patient.objects.get(id_card_number = pk)
+    patient = Patient.objects.get(id_card_number=pk)
     print(patient.sex)
-    return render(request,'app/patientdetails.html',{
-        'patient':patient,
-    })
+    return render(
+        request,
+        "app/patientdetails.html",
+        {
+            "patient": patient,
+        },
+    )
+
 
 def addPatient(request):
     form = NewPatientForm
     if request.method == "POST":
         form = NewPatientForm(request.POST)
-        
-        print(request.POST['adress'])
-        
-        
+
+        print(request.POST["adress"])
+
         if form.is_valid():
             print("Formulário Válido")
-            patient = Patient(id_card_number=request.POST['id_card_number'],
-                              healthcare_number = request.POST['healthcare_number'],
-                              adress = request.POST['adress'],
-                              phone_number = request.POST['phone_number'],
-                              name = request.POST['name'],
-                              birth_date = request.POST['birthdate'],
-                              sex = request.POST['sex'],
-                              nationality = request.POST['nationality'])
-            
+            patient = Patient(
+                id_card_number=request.POST["id_card_number"],
+                healthcare_number=request.POST["healthcare_number"],
+                adress=request.POST["adress"],
+                phone_number=request.POST["phone_number"],
+                name=request.POST["name"],
+                birth_date=request.POST["birthdate"],
+                sex=request.POST["sex"],
+                nationality=request.POST["nationality"],
+            )
+
             patient.save()
             print(patient)
-            
-            return redirect('patients')
-            
-                    
+
+            return redirect("patients")
+
         else:
             print(form.errors)
-            messages.error(request,form.errors)
-        
-    return render(request, "app/addpatient.html",{
-        "form":NewPatientForm
-    })
+            messages.error(request, form.errors)
+
+    return render(request, "app/addpatient.html", {"form": NewPatientForm})
+
 
 def physicians(request):
     physicians = Physician.objects.all()
-    return render(request, "app/physicians.html", {
-        'physicians' : physicians,
-    })
+    return render(
+        request,
+        "app/physicians.html",
+        {
+            "physicians": physicians,
+        },
+    )
+
+
+def physiciandetails(request, pk):
+    physician = Physician.objects.get(id_card_number=pk)
+    return render(
+        request,
+        "app/physiciandetails.html",
+        {
+            "doctor": physician,
+        },
+    )
 
 
 def prescriptions(request):
@@ -115,5 +135,3 @@ def exams(request):
 
 def diagnosis(request):
     return HttpResponse("Diagnosis")
-
-
