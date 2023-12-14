@@ -136,7 +136,6 @@ def physiciandetails(request, pk):
 def prescriptions(request):
     prescriptions = Prescription.objects.all()
     pm = PrescriptionMedication.objects.all()
-    medicaments = Medication.objects.all()
     return render(request, "app/prescriptions.html")
 
 def exams(request):
