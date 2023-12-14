@@ -1,14 +1,10 @@
 {% extends 'app/index.html' %}
 {% block content %}
-  {% include 'app/navparts.html' %}
+  {% include 'app/hero2.html' %}
   <section>
-    <div class="flex justify-end">
-      <a href="{% url 'addPatient' %}" class="ring-2 ring-slate-700 rounded-xl px-4 py-2 font-bold mr-10 bg-purple-300">Add Patient</a>
-    </div>
-
     <div class="mx-40 mt-10 border-4 rounded-xl">
       <table class="grip grid-cols-3 w-full table-auto">
-        <thead class="uppercase bg-purple-300">
+        <thead class="uppercase bg-blue-teal-gradient">
           <tr class="">
             <th>Id Card Number</th>
             <th>Name</th>

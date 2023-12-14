@@ -3,7 +3,6 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path("example", views.example, name="example"),
     # HOME PAGE for unauthenticated users
     path("HMS", views.landing, name="landing"),
     # HOME PAGE for authenticated users
@@ -14,12 +13,15 @@ urlpatterns = [
     path("logout/", views.logoutUser, name="logout"),
     
     #Lists of the Entities in the DB
-    path('patients/', views.patients, name ='patients'),
     path('admissions/',views.admissions, name = 'admissions'),
-    path('prescriptions/', views.prescriptions, name='prescriptions'),
     path('physicians/', views.physicians, name='physicians'),
+    path('patients/', views.patients, name ='patients'),
     path('exams/', views.exams, name = 'exams'),
     path('diagnosis/', views.diagnosis, name="diagnosis"),
+    path('prescriptions/', views.prescriptions, name='prescriptions'),
+    
+    # ADMISSIÕES
+    path("newadmission/", views.newAdmission, name="newAdmission"),
     
     # PACIENTES
     path('patientdetails/<str:pk>', views.patientdetails, name = 'patientdetails'),

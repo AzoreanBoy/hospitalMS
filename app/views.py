@@ -13,10 +13,6 @@ from .forms import NewPatientForm
 
 # Create your views here.
 
-def example(request):
-    return render(request, "app/indexexample.html")
-
-
 def landing(request):
     return render(request, "app/landing.html")
 
@@ -48,10 +44,22 @@ def logoutUser(request):
     return redirect("landing")
 
 
-# Lists
+# ADMISSIONS
 def admissions(request):
     admissions = Admission.objects.all()
-    return HttpResponse("Admissões")
+    return render(
+        request,
+        "app/admissions.html",
+        {
+            "admissions": admissions,
+        },
+    )
+
+def newAdmission(request):
+    return render(request, "app/newadmission.html",{})
+
+def admisisonDetails(request):
+    return render(request, "app/admissiondetails.html",{})
 
 
 def patients(request):
@@ -129,12 +137,11 @@ def prescriptions(request):
     prescriptions = Prescription.objects.all()
     pm = PrescriptionMedication.objects.all()
     medicaments = Medication.objects.all()
-    return HttpResponse("Prescriptions")
-
+    return render(request, "app/prescriptions.html")
 
 def exams(request):
-    return HttpResponse("Exams")
+    return render(request, "app/exams.html")
 
 
 def diagnosis(request):
-    return HttpResponse("Diagnosis")
+    return render(request, "app/diagnosis.html")
