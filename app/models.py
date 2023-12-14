@@ -65,6 +65,8 @@ class DiagnosisCode(models.Model):
 
 
 # Relational Models
+
+
 class Patient(models.Model):
     class SEX(models.TextChoices):
         FEMALE = "f", _("Female")
@@ -99,6 +101,18 @@ class Patient(models.Model):
             return "Male"
         else:
             return "Female"
+        
+class Admission(models.Model):
+    id = models.AutoField(primary_key=True)
+    adm_date = models.DateField(null=False)
+    urgency = models.BooleanField(null=False)
+    patient = models.ForeignKey(Patient, models.DO_NOTHING)
+
+    class Meta:
+        db_table = "admission"
+
+    def __str__(self):
+        return f"{self.adm_date} - {self.patient}"
 
 
 class Physician(models.Model):
@@ -125,6 +139,7 @@ class Physician(models.Model):
     birth_date = models.DateField(null=False, blank=False)
     nationality = models.CharField(max_length=256, blank=True, null=True)
     sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default="-")
+    admissions = models.ManyToManyField(Admission)
 
     class Meta:
         db_table = "physician"
@@ -139,29 +154,19 @@ class Physician(models.Model):
             return "Female"
 
 
-class Admission(models.Model):
-    id = models.AutoField(primary_key=True)
-    adm_date = models.DateField(null=False)
-    urgency = models.BooleanField(null=False)
-    patient = models.ForeignKey(Patient, models.DO_NOTHING)
-
-    class Meta:
-        db_table = "admission"
-
-    def __str__(self):
-        return f"{self.adm_date} - {self.patient}"
 
 
-class PhysicianActions(models.Model):
-    admission = models.ForeignKey(Admission, models.DO_NOTHING)
-    physician = models.ForeignKey(Physician, models.DO_NOTHING)
-    action = models.TextField()
 
-    class Meta:
-        unique_together = (("admission", "physician"),)
+# class PhysicianActions(models.Model):
+#     admission = models.ForeignKey(Admission, models.DO_NOTHING)
+#     physician = models.ForeignKey(Physician, models.DO_NOTHING)
+#     action = models.TextField()
 
-    def __str__(self):
-        return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
+#     class Meta:
+#         unique_together = (("admission", "physician"),)
+
+#     def __str__(self):
+#         return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
 
 
 class Diagnosis(models.Model):
@@ -172,6 +177,7 @@ class Diagnosis(models.Model):
     comment = models.TextField(blank=True, null=True)
 
     class Meta:
+        db_table = 'diagnosis'
         unique_together = (("date", "diagnosis", "admission"),)
 
     def __str__(self):

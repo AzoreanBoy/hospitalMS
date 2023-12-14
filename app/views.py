@@ -13,6 +13,9 @@ from .forms import NewPatientForm
 
 # Create your views here.
 
+def example(request):
+    return render(request, "example/index.html")
+
 
 def landing(request):
     return render(request, "app/landing.html")

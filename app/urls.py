@@ -3,6 +3,7 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
+    path("example", views.example, name="example"),
     # HOME PAGE for unauthenticated users
     path("HMS", views.landing, name="landing"),
     # HOME PAGE for authenticated users
