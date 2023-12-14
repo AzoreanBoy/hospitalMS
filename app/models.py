@@ -140,7 +140,7 @@ class Physician(models.Model):
     nationality = models.CharField(max_length=256, blank=True, null=True)
     sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default="-")
     image = models.CharField(max_length=512, blank=False, null=False)
-    admissions = models.ManyToManyField(Admission)
+    admissions = models.ManyToManyField(Admission, blank=True)
 
     class Meta:
         db_table = "physician"

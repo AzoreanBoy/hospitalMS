@@ -123,7 +123,7 @@ def physicians(request):
 
 
 def physiciandetails(request, pk):
-    physician = Physician.objects.get(id_card_number=pk)
+    physician = Physician.objects.filter(id_card_number = pk)
     return render(
         request,
         "app/physiciandetails.html",
