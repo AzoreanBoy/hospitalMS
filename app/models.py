@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 # Domains
+
 class Speciality(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -27,7 +28,7 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
-
+'''
 class Medication(models.Model):
     code = models.AutoField(primary_key=True)
     name = models.CharField(max_length=512)
@@ -39,7 +40,7 @@ class Medication(models.Model):
     def __str__(self):
         return self.name
 
-
+'''
 class ExamsCode(models.Model):
     code = models.AutoField(primary_key=True)
     description = models.CharField(max_length=512)
@@ -50,8 +51,7 @@ class ExamsCode(models.Model):
 
     def __str__(self):
         return self.description
-
-
+'''
 class DiagnosisCode(models.Model):
     id = models.AutoField(primary_key=True)
     description = models.CharField(max_length=100)
@@ -62,7 +62,7 @@ class DiagnosisCode(models.Model):
 
     def __str__(self):
         return self.description
-
+'''
 
 # Relational Models
 
@@ -139,6 +139,7 @@ class Physician(models.Model):
     birth_date = models.DateField(null=False, blank=False)
     nationality = models.CharField(max_length=256, blank=True, null=True)
     sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default="-")
+    image = models.CharField(max_length=512, blank=False, null=False)
     admissions = models.ManyToManyField(Admission)
 
     class Meta:
@@ -154,41 +155,40 @@ class Physician(models.Model):
             return "Female"
 
 
+'''
+class PhysicianActions(models.Model):
+    admission = models.ForeignKey(Admission, models.DO_NOTHING)
+    physician = models.ForeignKey(Physician, models.DO_NOTHING)
+    action = models.TextField()
 
+    class Meta:
+        unique_together = (("admission", "physician"),)
+     def __str__(self):
+        return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
 
-
-# class PhysicianActions(models.Model):
-#     admission = models.ForeignKey(Admission, models.DO_NOTHING)
-#     physician = models.ForeignKey(Physician, models.DO_NOTHING)
-#     action = models.TextField()
-
-#     class Meta:
-#         unique_together = (("admission", "physician"),)
-
-#     def __str__(self):
-#         return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
-
-
+'''
 class Diagnosis(models.Model):
+    id = models.AutoField(primary_key=True)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
     physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
     date = models.DateField(null=False, auto_now_add=True)
-    diagnosis = models.ForeignKey(DiagnosisCode, models.DO_NOTHING)
+    diagnosis = models.TextField(blank=False, null=False)
     comment = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = 'diagnosis'
-        unique_together = (("date", "diagnosis", "admission"),)
+        unique_together = (("date", "admission"),)
 
     def __str__(self):
         return f"Diagnosis {self.diagnosis} on {self.date} by {self.physician.name} related to Patient {self.admission.patient.id_card_number}"
 
 
 class Exam(models.Model):
+    id = models.AutoField(primary_key=True)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
     physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
     prescription_date = models.DateField(null=False, auto_now_add=True)
-    exam = models.ForeignKey(ExamsCode, models.DO_NOTHING, null=False)
+    exam =  models.ForeignKey(ExamsCode, models.DO_NOTHING, null=False)
     exam_date = models.DateField()
     result = models.TextField(blank=True, null=True)
 
@@ -201,6 +201,7 @@ class Exam(models.Model):
 
 
 class Prescription(models.Model):
+    id = models.AutoField(primary_key=True)
     prescription_date = models.DateField(null=False, auto_now_add=True)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
     physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
@@ -214,8 +215,8 @@ class Prescription(models.Model):
 
 class PrescriptionMedication(models.Model):
     prescription = models.ForeignKey(Prescription, models.DO_NOTHING)
-    medication = models.ForeignKey(Medication, models.DO_NOTHING)
-    dosage = models.CharField(max_length=512, blank=True, null=True)
+    medication = models.CharField(max_length=512, blank=False, null=False)
+    dosage = models.CharField(max_length=512, blank=False, null=False)
     comment = models.TextField(blank=True, null=True)
 
     class Meta:
