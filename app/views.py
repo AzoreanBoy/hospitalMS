@@ -17,7 +17,7 @@ def landing(request):
     return render(request, "app/landing.html")
 
 
-@login_required(login_url="landing")
+#@login_required(login_url="landing")
 def index(request):
     return render(request, "app/index.html")
 

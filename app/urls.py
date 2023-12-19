@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # HOME PAGE for unauthenticated users
-    path("HMS", views.landing, name="landing"),
+    #path("HMS", views.landing, name="landing"),
     # HOME PAGE for authenticated users
     path("", views.index, name="index"),
     
