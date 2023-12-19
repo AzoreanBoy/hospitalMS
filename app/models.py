@@ -139,7 +139,7 @@ class Physician(models.Model):
     birth_date = models.DateField(null=False, blank=False)
     nationality = models.CharField(max_length=256, blank=True, null=True)
     sex = models.CharField(max_length=1, null=False, choices=SEX.choices, default="-")
-    image = models.CharField(max_length=512, blank=False, null=False)
+    image = models.CharField(max_length=512, blank=True, null=True)
     admissions = models.ManyToManyField(Admission, blank=True)
 
     class Meta:
@@ -171,7 +171,7 @@ class Diagnosis(models.Model):
     id = models.AutoField(primary_key=True)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
     physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
-    date = models.DateField(null=False, auto_now_add=True)
+    date = models.DateField(null=False)
     diagnosis = models.TextField(blank=False, null=False)
     comment = models.TextField(blank=True, null=True)
 
@@ -202,7 +202,7 @@ class Exam(models.Model):
 
 class Prescription(models.Model):
     id = models.AutoField(primary_key=True)
-    prescription_date = models.DateField(null=False, auto_now_add=True)
+    prescription_date = models.DateField(null=False)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
     physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
 
