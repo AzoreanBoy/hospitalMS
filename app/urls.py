@@ -22,6 +22,7 @@ urlpatterns = [
     path('prescriptions/', views.prescriptions, name='prescriptions'),
     
     # ADMISSIÕES
+    path('admissions/<int:id>', views.admisisonDetails, name='admissionDetails'),
     path("newadmission/", views.newAdmission, name="newAdmission"),
     
     # PACIENTES
