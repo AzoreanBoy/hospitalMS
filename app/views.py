@@ -1,15 +1,13 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-
+from .decorators import *
+from .forms import NewPatientForm
 from .models import *
 
-from .decorators import *
-
-from .forms import NewPatientForm
 
 # Create your views here.
 
@@ -17,7 +15,7 @@ def landing(request):
     return render(request, "app/landing.html")
 
 
-#@login_required(login_url="landing")
+# @login_required(login_url="landing")
 def index(request):
     return render(request, "app/index.html")
 
@@ -47,19 +45,16 @@ def logoutUser(request):
 # ADMISSIONS
 def admissions(request):
     admissions = Admission.objects.all()
-    return render(
-        request,
-        "app/admissions.html",
-        {
-            "admissions": admissions,
-        },
-    )
+    return render(request, "app/admissions.html", {"admissions": admissions, }, )
+
 
 def newAdmission(request):
-    return render(request, "app/newadmission.html",{})
+    return render(request, "app/newadmission.html", {})
 
-def admisisonDetails(request):
-    return render(request, "app/admissiondetails.html",{})
+
+def admisisonDetails(request, id):
+    admission = Admission.objects.get(id=id)
+    return render(request, "app/admissiondetails.html", {"admission":admission})
 
 
 def patients(request):
@@ -70,13 +65,7 @@ def patients(request):
 def patientdetails(request, pk):
     patient = Patient.objects.get(id_card_number=pk)
     print(patient.sex)
-    return render(
-        request,
-        "app/patientdetails.html",
-        {
-            "patient": patient,
-        },
-    )
+    return render(request, "app/patientdetails.html", {"patient": patient, }, )
 
 
 def addPatient(request):
@@ -88,16 +77,11 @@ def addPatient(request):
 
         if form.is_valid():
             print("Formulário Válido")
-            patient = Patient(
-                id_card_number=request.POST["id_card_number"],
-                healthcare_number=request.POST["healthcare_number"],
-                adress=request.POST["adress"],
-                phone_number=request.POST["phone_number"],
-                name=request.POST["name"],
-                birth_date=request.POST["birthdate"],
-                sex=request.POST["sex"],
-                nationality=request.POST["nationality"],
-            )
+            patient = Patient(id_card_number=request.POST["id_card_number"],
+                              healthcare_number=request.POST["healthcare_number"], adress=request.POST["adress"],
+                              phone_number=request.POST["phone_number"], name=request.POST["name"],
+                              birth_date=request.POST["birthdate"], sex=request.POST["sex"],
+                              nationality=request.POST["nationality"], )
 
             patient.save()
             print(patient)
@@ -113,30 +97,20 @@ def addPatient(request):
 
 def physicians(request):
     physicians = Physician.objects.all()
-    return render(
-        request,
-        "app/physicians.html",
-        {
-            "physicians": physicians,
-        },
-    )
+    return render(request, "app/physicians.html", {"physicians": physicians, }, )
 
 
 def physiciandetails(request, pk):
-    physician = Physician.objects.filter(id_card_number = pk)
-    return render(
-        request,
-        "app/physiciandetails.html",
-        {
-            "doctor": physician,
-        },
-    )
+    physician = Physician.objects.get(id_card_number=pk)
+
+    return render(request, "app/physiciandetails.html", {"doctor": physician, }, )
 
 
 def prescriptions(request):
     prescriptions = Prescription.objects.all()
     pm = PrescriptionMedication.objects.all()
     return render(request, "app/prescriptions.html")
+
 
 def exams(request):
     return render(request, "app/exams.html")
