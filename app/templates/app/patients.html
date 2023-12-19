@@ -1,8 +1,10 @@
 {% extends 'app/index.html' %}
 {% block content %}
+  {% include 'app/header.html' %}
   {% include 'app/hero2.html' %}
-  <section>
-    <div class="mx-40 mt-10 border-4 rounded-xl">
+  {% comment %}
+  <section class="my-20 mx-20 lg:mx-40">
+    <div class="border-2 rounded-md">
       <table class="grip grid-cols-3 w-full table-auto">
         <thead class="uppercase bg-blue-teal-gradient">
           <tr class="">
@@ -14,7 +16,7 @@
         <tbody class="">
           <div class="">
             {% for pat in patients %}
-              <tr class="text-center hover:bg-violet-500" onclick="window.location='{% url 'patientdetails' pat.id_card_number %}'">
+              <tr class="text-center hover:bg-teal-300" onclick="window.location='{% url 'patientdetails' pat.id_card_number %}'">
                 <th>{{ pat.id_card_number }}</th>
                 <td>{{ pat.name }}</td>
                 <td>{{ pat.birth_date }}</td>
@@ -23,6 +25,24 @@
           </div>
         </tbody>
       </table>
+    </div>
+  </section>
+  {% endcomment %}
+
+  <section class="my-20 mx-20 lg:mx-40">
+    <div class="flex flex-row justify-between py-3 px-5 uppercase font-bold bg-blue-teal-gradient rounded-sm">
+      <p>Id Card Number</p>
+      <p>Name</p>
+      <p>Birth Date</p>
+    </div>
+    <div>
+      {% for pat in patients %}
+        <div class="flex flex-row justify-between ring-2 ring-slate-200 hover:bg-teal-300 rounded-sm py-3 px-5 my-5" onclick="window.location='{% url 'patientdetails' pat.id_card_number %}'">
+          <div class="font-bold">{{ pat.id_card_number }}</div>
+          <div>{{ pat.name }}</div>
+          <div>{{ pat.birth_date }}</div>
+        </div>
+      {% endfor %}
     </div>
   </section>
 {% endblock %}
