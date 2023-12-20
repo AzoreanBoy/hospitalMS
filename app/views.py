@@ -104,7 +104,7 @@ def addPatient(request):
     return render(request, "app/addpatient.html", {"form": NewPatientForm})
 
 
-# MÉDICOS -----------------------------------------------------------------
+# MÉDICOS --------------------------------------------------------------------------------------------------------------
 def physicians(request):
     physicians = Physician.objects.all()
     return render(request, "app/physicians.html", {"physicians": physicians, }, )
@@ -116,14 +116,14 @@ def physiciandetails(request, pk):
     return render(request, "app/physiciandetails.html", {"doctor": physician, }, )
 
 
-# PRESCRIÇÕES -----------------------------------------------------------
+# PRESCRIÇÕES ----------------------------------------------------------------------------------------------------------
 def prescriptions(request):
     prescriptions = Prescription.objects.all()
     pm = PrescriptionMedication.objects.all()
     return render(request, "app/prescriptions.html")
 
 
-# EXAMES ----------------------------------------------------------------
+# EXAMES ---------------------------------------------------------------------------------------------------------------
 def exams(request):
     exams = Exam.objects.all().order_by('-exam_date')
     return render(request, "app/exams.html", {"exams": exams, }, )
@@ -134,7 +134,7 @@ def examdetails(request, pk):
     return render(request, "app/examdetails.html", {"exam": exam})
 
 
-# DIAGNÓSTICOS -----------------------------------------------------------
+# DIAGNÓSTICOS ---------------------------------------------------------------------------------------------------------
 def diagnosis(request):
     diagnosis = Diagnosis.objects.all().order_by('-date')
     return render(request, "app/diagnosis.html", {"diagnosis": diagnosis, })

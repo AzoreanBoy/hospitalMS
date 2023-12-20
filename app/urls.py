@@ -31,4 +31,7 @@ urlpatterns = [
 
     # Exames
     path("examdetails/<int:pk>", views.examdetails, name="examdetails"),
+
+    # DIAGÓSTICOS
+    path("diagnosisdetails/<int:pk>", views.diagnosisdetails, name="diagnosisdetails"),
 ]

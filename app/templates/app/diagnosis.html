@@ -11,13 +11,13 @@
         </div>
 
         <div class="max-h-screen overflow-y-scroll p-1">
-            {% for exam in exams %}
+            {% for diag in diagnosis %}
                 <div class="flex flex-row justify-between ring-2 ring-slate-200 hover:bg-teal-300 rounded-sm py-3 px-5 my-5"
-                     onclick="window.location='{% url 'examdetails' exam.id %}'">
-                    <div class="">{{ exam.exam_date }}</div>
-                    <div>{{ exam.admission.patient.name }}</div>
-                    <div>{{ exam.exam }}</div>
-                    <div>{{ exam.physician.name }}</div>
+                     onclick="window.location='{% url 'diagnosisdetails' diag.id %}'">
+                    <div>{{ diag.date }}</div>
+                    <div>{{ diag.admission.patient.name }}</div>
+                    <div>{{ diag.diagnosis }}</div>
+                    <div>{{ diag.physician.name }}</div>
                 </div>
             {% endfor %}
         </div>
