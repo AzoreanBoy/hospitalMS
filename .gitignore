@@ -1,7 +1,7 @@
 # Folders in the app to the system
-app/__pycache__/*
+app/__pycache__/
 app/__pycache__/*.cpython-39.pyc
-app/migrations/*
+app/migrations/
 
 #Python cache in folder project
 hospitalMS/__pycache__/*
@@ -27,4 +27,5 @@ build/
 *.swp
 
 
+*.pyc
 *.pyc
