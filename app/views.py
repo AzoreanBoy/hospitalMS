@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from .decorators import *
-from .forms import NewPatientForm
+from .forms import NewPatientForm, NewAdmissionForm
 from .models import *
 
 
@@ -42,21 +42,30 @@ def logoutUser(request):
     return redirect("landing")
 
 
-# ADMISSIONS
+# ADMISSIONS ---------------------------------------------------------------------
 def admissions(request):
-    admissions = Admission.objects.all()
+    admissions = Admission.objects.all().order_by("-adm_date", "patient")
     return render(request, "app/admissions.html", {"admissions": admissions, }, )
 
 
 def newAdmission(request):
-    return render(request, "app/newadmission.html", {})
+    form = NewAdmissionForm()
+    if request.method == "POST":
+        print(request.POST)
+        form = NewAdmissionForm(request.POST)
+        if form.is_valid():
+            adm = form.save(commit=False)
+            adm.save()
+            return redirect("admissions")
+    return render(request, "app/newadmission.html", {'form': form, })
 
 
 def admisisonDetails(request, id):
     admission = Admission.objects.get(id=id)
-    return render(request, "app/admissiondetails.html", {"admission":admission})
+    return render(request, "app/admissiondetails.html", {"admission": admission})
 
 
+# PACIENTES ----------------------------------------------------------------
 def patients(request):
     patients = Patient.objects.all()
     return render(request, "app/patients.html", {"patients": patients})
@@ -95,6 +104,7 @@ def addPatient(request):
     return render(request, "app/addpatient.html", {"form": NewPatientForm})
 
 
+# MÉDICOS --------------------------------------------------------------------------------------------------------------
 def physicians(request):
     physicians = Physician.objects.all()
     return render(request, "app/physicians.html", {"physicians": physicians, }, )
@@ -106,15 +116,30 @@ def physiciandetails(request, pk):
     return render(request, "app/physiciandetails.html", {"doctor": physician, }, )
 
 
+# PRESCRIÇÕES ----------------------------------------------------------------------------------------------------------
 def prescriptions(request):
     prescriptions = Prescription.objects.all()
     pm = PrescriptionMedication.objects.all()
     return render(request, "app/prescriptions.html")
 
 
+# EXAMES ---------------------------------------------------------------------------------------------------------------
 def exams(request):
-    return render(request, "app/exams.html")
+    exams = Exam.objects.all().order_by('-exam_date')
+    return render(request, "app/exams.html", {"exams": exams, }, )
 
 
+def examdetails(request, pk):
+    exam = Exam.objects.get(pk=pk)
+    return render(request, "app/examdetails.html", {"exam": exam})
+
+
+# DIAGNÓSTICOS ---------------------------------------------------------------------------------------------------------
 def diagnosis(request):
-    return render(request, "app/diagnosis.html")
+    diagnosis = Diagnosis.objects.all().order_by('-date')
+    return render(request, "app/diagnosis.html", {"diagnosis": diagnosis, })
+
+
+def diagnosisdetails(request, pk):
+    diagnosis = Diagnosis.objects.get(pk=pk)
+    return render(request, "app/diagnosisdetails.html", {"diagnosis": diagnosis, })
