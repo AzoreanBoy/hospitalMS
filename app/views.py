@@ -48,6 +48,11 @@ def admissions(request):
     return render(request, "app/admissions.html", {"admissions": admissions, }, )
 
 
+def admisisonDetails(request, id):
+    admission = Admission.objects.get(id=id)
+    return render(request, "app/admissiondetails.html", {"admission": admission})
+
+
 def newAdmission(request):
     form = NewAdmissionForm()
     if request.method == "POST":
@@ -58,11 +63,6 @@ def newAdmission(request):
             adm.save()
             return redirect("admissions")
     return render(request, "app/newadmission.html", {'form': form, })
-
-
-def admisisonDetails(request, id):
-    admission = Admission.objects.get(id=id)
-    return render(request, "app/admissiondetails.html", {"admission": admission})
 
 
 # PACIENTES ----------------------------------------------------------------
@@ -118,9 +118,14 @@ def physiciandetails(request, pk):
 
 # PRESCRIÇÕES ----------------------------------------------------------------------------------------------------------
 def prescriptions(request):
-    prescriptions = Prescription.objects.all()
-    pm = PrescriptionMedication.objects.all()
-    return render(request, "app/prescriptions.html")
+    prescriptions = Prescription.objects.all().order_by('-prescription_date')
+    return render(request, "app/prescriptions.html", {"prescriptions": prescriptions, })
+
+
+def prescriptiondetails(request, pk):
+    prescription = Prescription.objects.get(pk=pk)
+    medications = PrescriptionMedication.objects.filter(prescription=prescription)
+    return render(request, "app/prescriptiondetails.html", {"prescription": prescription, "medications": medications, })
 
 
 # EXAMES ---------------------------------------------------------------------------------------------------------------
