@@ -11,8 +11,8 @@ from .models import *
 
 # Create your views here.
 
-def landing(request):
-    return render(request, "app/landing.html")
+# def landing(request):
+#     return render(request, "app/landing.html")
 
 
 # @login_required(login_url="landing")
@@ -20,32 +20,37 @@ def index(request):
     return render(request, "app/index.html")
 
 
-@unauthenticatedUser
-def loginUser(request):
-    if request.method == "POST":
-        us = request.POST["usernamelogin"]
-        pa = request.POST["password"]
-
-        user = authenticate(request, username=us, password=pa)
-
-        if user is not None:
-            print("User is not none")
-            login(request, user)
-            return redirect("index")
-        else:
-            messages.warning(request, "Username or password are incorrect.")
-    return render(request, "app/login.html")
-
-
-def logoutUser(request):
-    logout(request)
-    return redirect("landing")
+# @unauthenticatedUser
+# def loginUser(request):
+#     if request.method == "POST":
+#         us = request.POST["usernamelogin"]
+#         pa = request.POST["password"]
+#
+#         user = authenticate(request, username=us, password=pa)
+#
+#         if user is not None:
+#             print("User is not none")
+#             login(request, user)
+#             return redirect("index")
+#         else:
+#             messages.warning(request, "Username or password are incorrect.")
+#     return render(request, "app/login.html")
 
 
-# ADMISSIONS ---------------------------------------------------------------------
+# def logoutUser(request):
+#     logout(request)
+#     return redirect("landing")
+
+
+# ADMISSIONS -----------------------------------------------------------------------------------------------------------
 def admissions(request):
     admissions = Admission.objects.all().order_by("-adm_date", "patient")
     return render(request, "app/admissions.html", {"admissions": admissions, }, )
+
+
+def admisisonDetails(request, id):
+    admission = Admission.objects.get(id=id)
+    return render(request, "app/admissiondetails.html", {"admission": admission})
 
 
 def newAdmission(request):
@@ -60,12 +65,7 @@ def newAdmission(request):
     return render(request, "app/newadmission.html", {'form': form, })
 
 
-def admisisonDetails(request, id):
-    admission = Admission.objects.get(id=id)
-    return render(request, "app/admissiondetails.html", {"admission": admission})
-
-
-# PACIENTES ----------------------------------------------------------------
+# PACIENTES ------------------------------------------------------------------------------------------------------------
 def patients(request):
     patients = Patient.objects.all()
     return render(request, "app/patients.html", {"patients": patients})
@@ -118,9 +118,14 @@ def physiciandetails(request, pk):
 
 # PRESCRIÇÕES ----------------------------------------------------------------------------------------------------------
 def prescriptions(request):
-    prescriptions = Prescription.objects.all()
-    pm = PrescriptionMedication.objects.all()
-    return render(request, "app/prescriptions.html")
+    prescriptions = Prescription.objects.all().order_by('-prescription_date')
+    return render(request, "app/prescriptions.html", {"prescriptions": prescriptions, })
+
+
+def prescriptiondetails(request, pk):
+    prescription = Prescription.objects.get(pk=pk)
+    medications = PrescriptionMedication.objects.filter(prescription=prescription)
+    return render(request, "app/prescriptiondetails.html", {"prescription": prescription, "medications": medications, })
 
 
 # EXAMES ---------------------------------------------------------------------------------------------------------------

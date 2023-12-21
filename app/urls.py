@@ -10,7 +10,7 @@ urlpatterns = [
     path("", views.index, name="index"),
 
     # login/Logout
-    path("login/", views.loginUser, name="login"), path("logout/", views.logoutUser, name="logout"),
+    # path("login/", views.loginUser, name="login"), path("logout/", views.logoutUser, name="logout"),
 
     # Lists of the Entities in the DB
     path('admissions/', views.admissions, name='admissions'), path('physicians/', views.physicians, name='physicians'),
@@ -34,4 +34,7 @@ urlpatterns = [
 
     # DIAGÓSTICOS
     path("diagnosisdetails/<int:pk>", views.diagnosisdetails, name="diagnosisdetails"),
+
+    # PRESCRIÇÕES
+    path("prescriptiondetails/<int:pk>", views.prescriptiondetails, name="prescriptiondetails"),
 ]

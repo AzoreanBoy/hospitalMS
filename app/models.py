@@ -79,9 +79,9 @@ class Patient(models.Model):
         MALE = "m", _("Male")
 
     id_card_number = models.CharField(primary_key=True, max_length=8,
-        validators=[MinLengthValidator(8), MaxLengthValidator(8)], )
+                                      validators=[MinLengthValidator(8), MaxLengthValidator(8)], )
     healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)],
-        null=False, blank=False, )
+                                         null=False, blank=False, )
     name = models.CharField(max_length=512, null=False)
     adress = models.CharField(max_length=512, blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
@@ -123,9 +123,9 @@ class Physician(models.Model):
     speciality = models.ForeignKey(Speciality, on_delete=models.DO_NOTHING, null=False)
     department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=False)
     id_card_number = models.CharField(primary_key=True, max_length=8,
-        validators=[MinLengthValidator(8), MaxLengthValidator(8)], )
+                                      validators=[MinLengthValidator(8), MaxLengthValidator(8)], )
     healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)],
-        null=False, blank=False, )
+                                         null=False, blank=False, )
     name = models.CharField(max_length=512, null=False)
     adress = models.CharField(max_length=512, blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
