@@ -147,4 +147,5 @@ def diagnosis(request):
 
 def diagnosisdetails(request, pk):
     diagnosis = Diagnosis.objects.get(pk=pk)
-    return render(request, "app/diagnosisdetails.html", {"diagnosis": diagnosis, })
+    exams = Exam.objects.filter(admission=diagnosis.admission)
+    return render(request, "app/diagnosisdetails.html", {"diagnosis": diagnosis, "exams": exams})

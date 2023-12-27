@@ -1,6 +1,57 @@
 {% extends 'app/index.html' %}
 {% block content %}
-	{% include 'app/header.html' %}
+    {% include 'app/header.html' %}
     {% include 'app/hero2.html' %}
-    
+
+    <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20">
+        <div class="flex flex-row w-full border-2 py-10 rounded-t-md">
+            <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
+                 class="h-[12rem] float-left mx-24 "/>
+            <div class="ml-12 text-xl w-full">
+                <div class="flex w-full justify-center">
+                    <p class="text-4xl font-extrabold font-mono">Doctor Diagnosis Details</p>
+                </div>
+                <div class="my-16">
+                    <p class="font-bold">Doctor {{ diagnosis.physician.name }}</p>
+                    <p>{{ diagnosis.date }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="w-full border-b-2 border-x-2 py-10">
+            <div class="mx-20">
+                <p class="text-3xl font-bold">Patient Details</p>
+                <div class="flex flex-row space-x-8 my-5">
+                    <p class="font-bold">Patient Name</p>
+                    <p>{{ diagnosis.admission.patient.name }}</p>
+                </div>
+                <div class="flex flex-row space-x-8">
+                    <p class="font-bold">Birthdate</p>
+                    <p>{{ diagnosis.admission.patient.birth_date }}</p>
+                </div>
+            </div>
+        </div>
+        {% if exams|length > 0 %}
+            <div class="w-full border-b-2 border-x-2 py-10">
+                <div class="mx-20">
+                    <p class="text-3xl font-bold mb-4">Exams</p>
+                    {% for exam in exams %}
+                        <div class="border-2 border-gray-300 rounded-md p-4">
+                            {{ exam.exam_date }} - {{ exam.exam }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        {% endif %}
+        <div class="w-full border-b-2 border-x-2 py-10 rounded-b-md">
+            <p class="mx-20 font-bold text-3xl">Diagnosis</p>
+            <div class="mx-20 border-2 border-gray-300 rounded-md text-xl p-4 my-5">
+                {{ diagnosis.diagnosis }}
+            </div>
+            <p class="mx-20 font-bold">Additional Notes</p>
+            <p class="mx-20 border-2 border-gray-300 rounded-md p-4 my-5">{{ diagnosis.comment }}</p>
+        </div>
+
+    </section>
+
 {% endblock %}
