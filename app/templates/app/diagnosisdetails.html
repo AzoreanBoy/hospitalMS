@@ -12,30 +12,37 @@
                     <p class="text-4xl font-extrabold font-mono">Doctor Diagnosis Details</p>
                 </div>
                 <div class="my-16">
-                    <p class="font-bold">Doctor {{ diagnosis.physician.name }}</p>
+                    <p class="font-bold"><a href="{% url 'physiciandetails' diagnosis.physician.id_card_number %}">Doctor {{ diagnosis.physician.name }}</a>
+                    </p>
                     <p>{{ diagnosis.date }}</p>
                 </div>
             </div>
         </div>
         <div class="w-full border-b-2 border-x-2 py-10">
-            <div class="mx-20">
+            <div class="mx-20 space-y-5">
                 <p class="text-3xl font-bold">Patient Details</p>
                 <div class="flex flex-row space-x-8 my-5">
-                    <p class="font-bold">Patient Name</p>
-                    <p>{{ diagnosis.admission.patient.name }}</p>
+                    <p class="font-bold w-48 flex items-center">Patient Name</p>
+                    <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2"><a
+                            href="{% url 'patientdetails' diagnosis.admission.patient.id_card_number %}">{{ diagnosis.admission.patient.name }}</a>
+                    </p>
                 </div>
                 <div class="flex flex-row space-x-8">
-                    <p class="font-bold">Birthdate</p>
-                    <p>{{ diagnosis.admission.patient.birth_date }}</p>
+                    <p class="font-bold w-48 flex items-center">ID Card Number</p>
+                    <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ diagnosis.admission.patient.id_card_number }}</p>
+                </div>
+                <div class="flex flex-row space-x-8">
+                    <p class="font-bold w-48 flex items-center">Birthdate</p>
+                    <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ diagnosis.admission.patient.birth_date }}</p>
                 </div>
             </div>
         </div>
         {% if exams|length > 0 %}
             <div class="w-full border-b-2 border-x-2 py-10">
-                <div class="mx-20">
+                <div class="mx-20 space-y-2">
                     <p class="text-3xl font-bold mb-4">Exams</p>
                     {% for exam in exams %}
-                        <div class="border-2 border-gray-300 rounded-md p-4">
+                        <div class="border-2 border-gray-300 rounded-md p-3">
                             {{ exam.exam_date }} - {{ exam.exam }}
                         </div>
                     {% endfor %}
