@@ -3,6 +3,37 @@
     {% include 'app/header.html' %}
     {% include 'app/hero2.html' %}
     <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20">
-
+        <div class="mx-20">
+            <div class="flex flex-row w-full border-2 py-10 rounded-t-md font-mono">
+                <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
+                     class="h-[12rem] float-left mx-24 "/>
+                <div class="ml-12 text-xl w-full">
+                    <div class="flex w-full justify-center">
+                        <p class="text-4xl font-extrabold">Exam Details</p>
+                    </div>
+                    <div class="my-16">
+                        <p class="font-bold">Doctor {{ exam.physician.name }}</p>
+                        <p>{{ diagnosis.date }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full border-b-2 border-x-2 py-10">
+                <div class="mx-20 space-y-5">
+                    <p class="text-3xl font-bold">Patient Details</p>
+                    <div class="flex flex-row space-x-8">
+                        <p class="font-bold">Patient Name</p>
+                        <p>{{ exam.admission.patient.name }}</p>
+                    </div>
+                    <div class="flex flex-row space-x-8">
+                        <p class="font-bold">ID Card Number</p>
+                        <p>{{ exam.admission.patient.id_card_number }}</p>
+                    </div>
+                    <div class="flex flex-row space-x-8">
+                        <p class="font-bold">Birthdate</p>
+                        <p>{{ exam.admission.patient.birth_date }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}
