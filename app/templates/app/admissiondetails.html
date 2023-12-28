@@ -2,7 +2,115 @@
 {% block content %}
     {% include 'app/header.html' %}
     {% include 'app/hero2.html' %}
-    <section class="my-20 mx-20 lg:mx-40">
+    <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20">
+        <div class="mx-20">
+            <div class="flex flex-row w-full border-2 py-10 rounded-t-md font-mono">
+                <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
+                     class="h-[12rem] float-left mx-24 "/>
+                <div class="ml-12 text-xl w-full flex justify-center items-center">
+                    <p class="text-4xl font-extrabold uppercase">Admission Details</p>
+                </div>
+            </div>
+            <div class="w-full border-b-2 border-x-2 rounded-b-md py-10">
+                <div class="mx-20 space-y-5">
+                    <p class="text-3xl font-bold uppercase">Admission Details</p>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">Admission ID</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.id }}
+                        </p>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center ">Admisison Date</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.adm_date }}</p>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center ">Urgency</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.urgency }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full border-b-2 border-x-2 py-10">
+                <div class="mx-20 space-y-5">
+                    <p class="text-3xl font-bold uppercase">Patient Details</p>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">Patient Name</p>
+                        <a href="{% url 'patientdetails' admission.patient.id_card_number %}"
+                           class="border-2 border-gray-300 rounded-md w-full px-5 py-2"><p
+                        >{{ admission.patient.name }}
+                        </p></a>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">Birthdate</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.patient.birth_date }}</p>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">ID Card Number</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.patient.id_card_number }}</p>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">Healthcare Number</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.patient.healthcare_number }}</p>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">Sex</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.patient.get_sex }}</p>
+                    </div>
+                    <div class="flex flex-row">
+                        <p class="font-bold w-48 flex items-center">Nationality</p>
+                        <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ admission.patient.nationality }}</p>
+                    </div>
+                </div>
+            </div>
+            {% if exams|length > 0 %}
+                <div class="w-full border-b-2 border-x-2 rounded-b-md py-10">
+                    <div class="mx-20 space-y-5">
+                        <p class="text-3xl font-bold uppercase">Exams</p>
+                        <div class="flex flex-row">
+                            {% for exam in exams %}
+                                <div class="flex flex-row space-x-5 hover:cursor-pointer border-2 w-full p-4 rounded-md"
+                                     onclick="window.location='{% url 'examdetails' exam.id %}'">
+                                    <p>{{ exam.exam_date }}</p>
+                                    <p>{{ exam.exam }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if diagnosis|length > 0 %}
+                <div class="w-full border-b-2 border-x-2 rounded-b-md py-10">
+                    <div class="mx-20 space-y-5">
+                        <p class="text-3xl font-bold uppercase">Diagnosis</p>
+                        <div class="flex flex-row">
+                            {% for diag in diagnosis %}
+                                <div class="flex flex-row space-x-5 hover:cursor-pointer border-2 w-full p-4 rounded-md"
+                                     onclick="window.location='{% url 'diagnosisdetails' diag.id %}'">
+                                    <p>{{ diag.date }}</p>
+                                    <p>{{ diag.diagnosis }}</p>
+                                </div>
+                            {% endfor %}
 
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if prescriptions|length > 0 %}
+                <div class="w-full border-b-2 border-x-2 rounded-b-md py-10">
+                    <div class="mx-20 space-y-5">
+                        <p class="text-3xl font-bold uppercase">Prescriptions</p>
+                        <div class="flex flex-row">
+                            {% for prescription in prescriptions %}
+                                <div class="flex flex-row space-x-5 hover:cursor-pointer border-2 w-full p-4 rounded-md"
+                                     onclick="window.location='{% url 'prescriptiondetails' prescription.id %}'">
+                                    <p>{{ prescription.prescription_date }}</p>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
     </section>
+
 {% endblock %}

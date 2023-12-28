@@ -9,7 +9,7 @@
                      class="h-[12rem] float-left mx-24 "/>
                 <div class="ml-12 text-xl w-full">
                     <div class="flex w-full justify-center">
-                        <p class="text-4xl font-extrabold">Exam Details</p>
+                        <p class="text-4xl font-extrabold uppercase">Exam Details</p>
                     </div>
                     <div class="my-16">
                         <p class="font-bold"><a href="{% url 'physiciandetails' exam.physician.id_card_number %}">Doctor {{ exam.physician.name }}</a></p>
@@ -19,7 +19,7 @@
             </div>
             <div class="w-full border-b-2 border-x-2 py-10">
                 <div class="mx-20 space-y-5">
-                    <p class="text-3xl font-bold">Patient Details</p>
+                    <p class="text-3xl font-bold uppercase">Patient Details</p>
                     <div class="flex flex-row">
                         <p class="font-bold w-48 flex items-center">Patient Name</p>
                         <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2"><a
@@ -38,7 +38,7 @@
             </div>
             <div class="w-full border-b-2 border-x-2 py-10 rounded-b-md">
                 <div class="mx-20 space-y-5">
-                    <p class="font-bold text-3xl">Exam</p>
+                    <p class="font-bold text-3xl uppercase">Exam</p>
                     <div class="border-2 border-gray-300 rounded-md text-xl p-4 my-5">
                         {{ exam.exam }}
                     </div>
@@ -51,7 +51,7 @@
                         <p class="border-2 border-gray-300 rounded-md w-full px-5 py-2">{{ exam.exam_date }}</p>
                     </div>
                     <p class="font-bold">Result</p>
-                    <p class="border-2 border-gray-300 rounded-md p-4 my-5 h-32">{{ exam.result }}</p>
+                    <p class="border-2 border-gray-300 rounded-md p-4 my-5 h-48 overflow-y-scroll">{{ exam.result }}</p>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
     {% include 'app/hero2.html' %}
 
     <section class="relative bg-white px-4 sm:px-8 lg:px-40 xl:px-72 2xl:px-96 py-20">
-        <div class="flex flex-row w-full border-2 py-10">
+        <div class="flex flex-row w-full border-2 rounded-t-md py-10">
             <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
                  class="h-[12rem] float-left mx-24 "/>
             <div class="ml-12 text-xl w-full">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full border-b-2 border-x-2 py-10 ">
+        <div class="w-full border-b-2 border-x-2 py-10 rounded-b-md">
             <div class="mx-10">
                 {% for medication in medications %}
                     <div class="flex flex-row space-x-8 mb-12 text-xl p-4 px-8 border-2 shadow-lg">
@@ -45,9 +45,7 @@
                             </div>
                         </div>
                     </div>
-
                 {% endfor %}
-
             </div>
         </div>
     </section>
