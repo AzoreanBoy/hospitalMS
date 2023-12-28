@@ -7,7 +7,7 @@
         <div class="flex flex-row w-full border-2 py-10">
             <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png"
                  class="h-[12rem] float-left mx-24 "/>
-            <div class="ml-12 text-xl">
+            <div class="ml-12 text-xl w-full">
                 <div class="my-5">
                     <p class="font-bold">Doctor {{ prescription.physician.name }}</p>
                     <p class="">{{ prescription.prescription_date }}</p>
@@ -18,7 +18,9 @@
                 </div>
                 <div class="mt-12 flex flex-row">
                     <p class="font-bold">Patient:</p>
-                    <p class="ml-3">{{ prescription.admission.patient.name }}</p>
+                    <p class="ml-3"><a href="
+                            {% url 'patientdetails' prescription.admission.patient.id_card_number %}">{{ prescription.admission.patient.name }}</a>
+                    </p>
                 </div>
             </div>
         </div>
