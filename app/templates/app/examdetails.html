@@ -12,7 +12,7 @@
                         <p class="text-4xl font-extrabold">Exam Details</p>
                     </div>
                     <div class="my-16">
-                        <p class="font-bold">Doctor {{ exam.physician.name }}</p>
+                        <p class="font-bold"><a href="{% url 'physiciandetails' exam.physician.id_card_number %}">Doctor {{ exam.physician.name }}</a></p>
                         <p>{{ diagnosis.date }}</p>
                     </div>
                 </div>

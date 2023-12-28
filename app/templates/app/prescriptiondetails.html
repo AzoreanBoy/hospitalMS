@@ -9,7 +9,9 @@
                  class="h-[12rem] float-left mx-24 "/>
             <div class="ml-12 text-xl w-full">
                 <div class="my-5">
-                    <p class="font-bold">Doctor {{ prescription.physician.name }}</p>
+                    <p class="font-bold"><a
+                            href="{% url 'physiciandetails' prescription.physician.id_card_number %}">Doctor {{ prescription.physician.name }}</a>
+                    </p>
                     <p class="">{{ prescription.prescription_date }}</p>
                     <div class="md:flex md:flex-row">
                         <p class="font-bold font-mono">Prescription Nº</p>
