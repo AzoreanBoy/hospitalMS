@@ -42,7 +42,8 @@
                 <div class="mx-20 space-y-2">
                     <p class="text-3xl font-bold mb-4 uppercase">Exams</p>
                     {% for exam in exams %}
-                        <div class="border-2 border-gray-300 rounded-md p-3">
+                        <div class="border-2 border-gray-300 rounded-md p-3 hover:cursor-pointer"
+                             onclick="window.location='{% url 'examdetails' exam.id %}'">
                             {{ exam.exam_date }} - {{ exam.exam }}
                         </div>
                     {% endfor %}

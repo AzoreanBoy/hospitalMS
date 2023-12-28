@@ -1225,11 +1225,6 @@ select {
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
-.divide-amber-50 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(255 251 235 / var(--tw-divide-opacity));
-}
-
 .overflow-hidden {
   overflow: hidden;
 }
