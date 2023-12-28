@@ -1,11 +1,9 @@
 {% extends 'app/index.html' %}
 {% block content %}
-  {% include 'app/navparts.html' %}
+    {% include "app/header.html" %}
+    {% include 'app/hero2.html' %}
+    {% comment %}
   <section>
-    <div class="flex justify-end">
-      <a href="{% url 'addPatient' %}" class="ring-2 ring-slate-700 rounded-xl px-4 py-2 font-bold mr-10 bg-purple-300">Add Physician</a>
-    </div>
-
     <div class="mx-40 mt-10 border-4 rounded-xl">
       <table class="grip grid-cols-3 w-full table-auto">
         <thead class="uppercase bg-purple-300">
@@ -29,4 +27,26 @@
       </table>
     </div>
   </section>
+  {% endcomment %}
+
+    <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20">
+        <div class="md:flex md:flex-wrap mt-6 md:mx-4">
+            {% for doctor in physicians %}
+                <a href="{% url 'physiciandetails' pk=doctor.id_card_number %}"
+                   class="md:px-4 md:w-1/2 xl:w-1/4 my-5">
+                    <div>
+                        <div class="bg-white rounded border border-gray-300">
+                            <div class="w-full h-56 overflow-hidden bg-gray-300">
+                                <img src="{{ doctor.image }}" alt="Doctor {{ doctor.name }}">
+                            </div>
+                            <div class="p-4">
+                                <p class="text-lg font-semibold leading-tight mt-4">{{ doctor.name }}</p>
+                                <p class="text-gray-600 mt-1">{{ doctor.speciality }} - {{ doctor.department }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

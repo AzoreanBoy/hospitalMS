@@ -1,0 +1,70 @@
+{% extends 'app/index.html' %}
+{% block content %}
+    {% include 'app/header.html' %}
+    {% include 'app/hero2.html' %}
+    <section class="my-20 mx-20 lg:mx-40">
+
+        <div class="w-full lg:w-1/2 lg:px-8 mt-12 lg:mt-0 mb-12">
+            <div class="md:flex">
+                <div>
+                    <div class="w-16 h-16 bg-blue-600 rounded-full"></div>
+                </div>
+                <p class="flex justify-center w-64 px-3 py-2 text-3xl font-bold rounded-md">New Admission</p>
+            </div>
+        </div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="my-5">
+                <label for="urgency" class="font-bold mr-5">Urgency</label>
+                <input type="checkbox" name="urgency" class="">
+            </div>
+            <div class="my-5 flex flex-row">
+                <label for="patient" class="font-bold mr-5">Patient</label>
+                <div class="flex flex-row space-x-5">
+                    <div>
+                        <input type="radio" id="html" name="patient" value="new"
+                               onchange="togglePatientView('new')">
+                        <label for="new">New</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="css" name="patient" value="existing" checked="true"
+                               onchange="togglePatientView('existing')">
+                        <label for="css">Existing</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="existingPatient" class="">
+                {{ form.patient }}
+            </div>
+
+            <div id="newPatient" class="hidden">
+                New Patient
+            </div>
+
+            <input type="submit" value="Admit">
+
+
+        </form>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function togglePatientView(selectedValue) {
+            var existingPatientDiv = document.getElementById('existingPatient');
+            var newPatientDiv = document.getElementById('newPatient');
+
+            if (selectedValue === 'existing') {
+                existingPatientDiv.classList.remove('hidden');
+                newPatientDiv.classList.add('hidden');
+            } else {
+                existingPatientDiv.classList.add('hidden');
+                newPatientDiv.classList.remove('hidden');
+            }
+        }
+    </script>
+
+{% endblock %}
+

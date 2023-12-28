@@ -1,6 +1,6 @@
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 # Domains
@@ -28,6 +28,7 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+
 '''
 class Medication(models.Model):
     code = models.AutoField(primary_key=True)
@@ -41,6 +42,8 @@ class Medication(models.Model):
         return self.name
 
 '''
+
+
 class ExamsCode(models.Model):
     code = models.AutoField(primary_key=True)
     description = models.CharField(max_length=512)
@@ -51,6 +54,8 @@ class ExamsCode(models.Model):
 
     def __str__(self):
         return self.description
+
+
 '''
 class DiagnosisCode(models.Model):
     id = models.AutoField(primary_key=True)
@@ -64,6 +69,7 @@ class DiagnosisCode(models.Model):
         return self.description
 '''
 
+
 # Relational Models
 
 
@@ -72,17 +78,10 @@ class Patient(models.Model):
         FEMALE = "f", _("Female")
         MALE = "m", _("Male")
 
-    id_card_number = models.CharField(
-        primary_key=True,
-        max_length=8,
-        validators=[MinLengthValidator(8), MaxLengthValidator(8)],
-    )
-    healthcare_number = models.CharField(
-        max_length=9,
-        validators=[MinLengthValidator(9), MaxLengthValidator(9)],
-        null=False,
-        blank=False,
-    )
+    id_card_number = models.CharField(primary_key=True, max_length=8,
+                                      validators=[MinLengthValidator(8), MaxLengthValidator(8)], )
+    healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)],
+                                         null=False, blank=False, )
     name = models.CharField(max_length=512, null=False)
     adress = models.CharField(max_length=512, blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
@@ -101,10 +100,11 @@ class Patient(models.Model):
             return "Male"
         else:
             return "Female"
-        
+
+
 class Admission(models.Model):
     id = models.AutoField(primary_key=True)
-    adm_date = models.DateField(null=False)
+    adm_date = models.DateField(null=False, auto_now=True)
     urgency = models.BooleanField(null=False)
     patient = models.ForeignKey(Patient, models.DO_NOTHING)
 
@@ -122,17 +122,10 @@ class Physician(models.Model):
 
     speciality = models.ForeignKey(Speciality, on_delete=models.DO_NOTHING, null=False)
     department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=False)
-    id_card_number = models.CharField(
-        primary_key=True,
-        max_length=8,
-        validators=[MinLengthValidator(8), MaxLengthValidator(8)],
-    )
-    healthcare_number = models.CharField(
-        max_length=9,
-        validators=[MinLengthValidator(9), MaxLengthValidator(9)],
-        null=False,
-        blank=False,
-    )
+    id_card_number = models.CharField(primary_key=True, max_length=8,
+                                      validators=[MinLengthValidator(8), MaxLengthValidator(8)], )
+    healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)],
+                                         null=False, blank=False, )
     name = models.CharField(max_length=512, null=False)
     adress = models.CharField(max_length=512, blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
@@ -147,7 +140,7 @@ class Physician(models.Model):
 
     def __str__(self):
         return f"{self.id_card_number} - Doctor {self.name}"
-    
+
     def get_sex(self):
         if self.sex == "m":
             return "Male"
@@ -167,6 +160,8 @@ class PhysicianActions(models.Model):
         return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
 
 '''
+
+
 class Diagnosis(models.Model):
     id = models.AutoField(primary_key=True)
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
@@ -188,7 +183,7 @@ class Exam(models.Model):
     admission = models.ForeignKey(Admission, models.DO_NOTHING, null=False)
     physician = models.ForeignKey(Physician, models.DO_NOTHING, null=False)
     prescription_date = models.DateField(null=False, auto_now_add=True)
-    exam =  models.ForeignKey(ExamsCode, models.DO_NOTHING, null=False)
+    exam = models.ForeignKey(ExamsCode, models.DO_NOTHING, null=False)
     exam_date = models.DateField()
     result = models.TextField(blank=True, null=True)
 

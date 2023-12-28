@@ -2,11 +2,14 @@
 app/__pycache__/
 app/__pycache__/*.cpython-39.pyc
 app/migrations/
+.idea
 
 #Python cache in folder project
 hospitalMS/__pycache__/*
 hospitalMS/__pycache__/*.cpython-39.pyc
 *.cpython-39.pyc
+hospitalMS/settings.py
+hospitalMS/*.py
 
 # Ignore build output
 build/

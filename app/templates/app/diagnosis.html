@@ -1,0 +1,25 @@
+{% extends 'app/index.html' %}
+{% block content %}
+    {% include 'app/header.html' %}
+    {% include 'app/hero2.html' %}
+    <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20">
+        <div class="flex flex-row justify-between py-3 px-5 uppercase font-bold bg-blue-teal-gradient rounded-sm">
+            <p>Diagnosis Date</p>
+            <p>Patient Name</p>
+            <p>Diagnosis</p>
+            <p>Physician</p>
+        </div>
+
+        <div class="max-h-screen overflow-y-scroll p-1">
+            {% for diag in diagnosis %}
+                <div class="flex flex-row justify-between ring-2 ring-slate-200 hover:bg-teal-300 rounded-sm py-3 px-5 my-5"
+                     onclick="window.location='{% url 'diagnosisdetails' diag.id %}'">
+                    <div>{{ diag.date }}</div>
+                    <div>{{ diag.admission.patient.name }}</div>
+                    <div>{{ diag.diagnosis }}</div>
+                    <div>{{ diag.physician.name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

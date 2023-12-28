@@ -1,0 +1,30 @@
+{% extends "app/index.html" %}
+{% block content %}
+    {% include "app/header.html" %}
+    {% include "app/hero2.html" %}
+    <section class="my-20 mx-20 lg:mx-40">
+        <div class="flex justify-end mb-10">
+            <a href="{% url 'newAdmission' %}"
+               class="h-12 border-2 p-3 rounded-md border-teal-500 font-semibold text-teal-500 hover:bg-teal-500 hover:text-white">Admit a Patient</a>
+        </div>
+
+
+        <div class="flex flex-row justify-between py-3 px-5 uppercase font-bold bg-blue-teal-gradient rounded-sm">
+            <p>Admission Date</p>
+            <p>Patient Name</p>
+            <p>Urgency</p>
+        </div>
+        <div class="max-h-screen overflow-y-scroll p-1">
+            {% for adm in admissions %}
+                <div class="flex flex-row justify-between ring-2 ring-slate-200 hover:bg-teal-300 rounded-sm py-3 px-5 my-5"
+                     onclick="window.location='{% url 'admissionDetails' adm.id %}'">
+                    <div class="">{{ adm.adm_date }}</div>
+                    <div>{{ adm.patient.name }}</div>
+                    <div>{{ adm.urgency }}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+{% endblock content %}

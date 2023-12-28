@@ -1,0 +1,23 @@
+{% extends 'app/index.html' %}
+{% block content %}
+    {% include 'app/header.html' %}
+    {% include 'app/hero2.html' %}
+    <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20">
+        <div class="flex flex-row justify-between py-3 px-5 uppercase font-bold bg-blue-teal-gradient rounded-sm">
+            <p>Prescription Date</p>
+            <p>Patient Name</p>
+            <p>Physician</p>
+        </div>
+
+        <div class="max-h-screen overflow-y-scroll p-1">
+            {% for prescription in prescriptions %}
+                <div class="flex flex-row justify-between ring-2 ring-slate-200 hover:bg-teal-300 rounded-sm py-3 px-5 my-5"
+                     onclick="window.location='{% url 'prescriptiondetails' prescription.id %}'">
+                    <div>{{ prescription.prescription_date }}</div>
+                    <div>{{ prescription.admission.patient.name }}</div>
+                    <div>{{ prescription.physician.name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
