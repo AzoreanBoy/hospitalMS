@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Speciality(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=False)
 
     class Meta:
         # managed = False
@@ -19,7 +19,7 @@ class Speciality(models.Model):
 
 class Department(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, null=False)
 
     class Meta:
         # managed = False
@@ -29,24 +29,11 @@ class Department(models.Model):
         return self.name
 
 
-'''
-class Medication(models.Model):
-    code = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=512)
-
-    class Meta:
-        # managed = False
-        db_table = "medication"
-
-    def __str__(self):
-        return self.name
-
-'''
 
 
 class ExamsCode(models.Model):
     code = models.AutoField(primary_key=True)
-    description = models.CharField(max_length=512)
+    description = models.CharField(max_length=512, null=False)
 
     class Meta:
         # managed = False
@@ -56,18 +43,6 @@ class ExamsCode(models.Model):
         return self.description
 
 
-'''
-class DiagnosisCode(models.Model):
-    id = models.AutoField(primary_key=True)
-    description = models.CharField(max_length=100)
-
-    class Meta:
-        # managed = False
-        db_table = "diagnosis_code"
-
-    def __str__(self):
-        return self.description
-'''
 
 
 # Relational Models
@@ -83,7 +58,7 @@ class Patient(models.Model):
     healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)],
                                          null=False, blank=False, )
     name = models.CharField(max_length=512, null=False)
-    adress = models.CharField(max_length=512, blank=True, null=True)
+    address = models.CharField(max_length=512, blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
     birth_date = models.DateField(null=False, blank=False)
     nationality = models.CharField(max_length=256, blank=True, null=True)
