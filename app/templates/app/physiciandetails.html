@@ -156,6 +156,19 @@
         </div>
 
     </section>
+    <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-40 py-20 mx-20">
+        <div class="flex justify-center bg-blue-teal-gradient rounded-md p-4">
+            <p class="font-bold text-3xl font-mono uppercase">Admissions List</p>
+        </div>
+        <div class="grid gap-3 mt-10">
+            {% for admission in admissions %}
+                <div class="flex justify-center border-2 p-4 rounded-md hover:cursor-pointer"
+                     onclick="window.location='{% url 'admissionDetails' admission.id %}'">
+                    <p>{{ admission.adm_date }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
 
 
