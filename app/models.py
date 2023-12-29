@@ -58,7 +58,7 @@ class Patient(models.Model):
     healthcare_number = models.CharField(max_length=9, validators=[MinLengthValidator(9), MaxLengthValidator(9)],
                                          null=False, blank=False, )
     name = models.CharField(max_length=512, null=False)
-    address = models.CharField(max_length=512, blank=True, null=True)
+    adress = models.CharField(max_length=512, blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
     birth_date = models.DateField(null=False, blank=False)
     nationality = models.CharField(max_length=256, blank=True, null=True)
@@ -121,20 +121,6 @@ class Physician(models.Model):
             return "Male"
         else:
             return "Female"
-
-
-'''
-class PhysicianActions(models.Model):
-    admission = models.ForeignKey(Admission, models.DO_NOTHING)
-    physician = models.ForeignKey(Physician, models.DO_NOTHING)
-    action = models.TextField()
-
-    class Meta:
-        unique_together = (("admission", "physician"),)
-     def __str__(self):
-        return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
-
-'''
 
 
 class Diagnosis(models.Model):
