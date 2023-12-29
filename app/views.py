@@ -134,8 +134,8 @@ def physicians(request):
 
 def physiciandetails(request, pk):
     physician = Physician.objects.get(id_card_number=pk)
-
-    return render(request, "app/physiciandetails.html", {"doctor": physician, }, )
+    admissions = physician.admissions.all()
+    return render(request, "app/physiciandetails.html", {"doctor": physician, "admissions": admissions }, )
 
 
 # PRESCRIÇÕES ----------------------------------------------------------------------------------------------------------
