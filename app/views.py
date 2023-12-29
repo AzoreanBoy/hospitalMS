@@ -52,7 +52,7 @@ def admisisonDetails(request, id):
     admission = Admission.objects.get(id=id)
     exams = Exam.objects.filter(admission=admission).order_by("-exam_date")
     diagnosis = Diagnosis.objects.filter(admission=admission).order_by("-date")
-    prescriptions = Prescription.objects.filter(admission=admission).order_by("-id")
+    prescriptions = Prescription.objects.filter(admission=admission).order_by("-prescription_date")
     return render(request, "app/admissiondetails.html",
                   {"admission": admission, "exams": exams, "diagnosis": diagnosis, "prescriptions": prescriptions})
 
