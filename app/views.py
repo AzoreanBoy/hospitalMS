@@ -59,14 +59,32 @@ def admisisonDetails(request, id):
 
 def newAdmission(request):
     form = NewAdmissionForm()
+    newpatient = NewPatientForm()
     if request.method == "POST":
         print(request.POST)
-        form = NewAdmissionForm(request.POST)
-        if form.is_valid():
-            adm = form.save(commit=False)
-            adm.save()
-            return redirect("admissions")
-    return render(request, "app/newadmission.html", {'form': form, })
+        if request.POST['patient_use'] == 'existing':
+            print("* " * 10 + "New Admission With Existing Patient" + " *" * 10)
+            form = NewAdmissionForm(request.POST)
+            if form.is_valid():
+                adm = form.save(commit=False)
+                adm.save()
+                print(adm)
+        else:
+            patient = NewPatientForm(request.POST)
+            adm = NewAdmissionForm(request.POST)
+
+            if patient.is_valid() and adm.is_valid():
+                newpatient = patient.save(commit=False)
+                newpatient.birth_date = request.POST['birthdate']
+                newpatient.sex = request.POST['sex']
+                newpatient.save()
+
+                newadm = adm.save(commit=False)
+                newadm.patient = newpatient
+                newadm.save()
+
+        return redirect("admissions")
+    return render(request, "app/newadmission.html", {'form': form, "newPatient": newpatient})
 
 
 # PACIENTES ------------------------------------------------------------------------------------------------------------
@@ -81,31 +99,31 @@ def patientdetails(request, pk):
     return render(request, "app/patientdetails.html", {"patient": patient, "admissions": admissions}, )
 
 
-def addPatient(request):
-    form = NewPatientForm
-    if request.method == "POST":
-        form = NewPatientForm(request.POST)
-
-        print(request.POST["adress"])
-
-        if form.is_valid():
-            print("Formulário Válido")
-            patient = Patient(id_card_number=request.POST["id_card_number"],
-                              healthcare_number=request.POST["healthcare_number"], adress=request.POST["adress"],
-                              phone_number=request.POST["phone_number"], name=request.POST["name"],
-                              birth_date=request.POST["birthdate"], sex=request.POST["sex"],
-                              nationality=request.POST["nationality"], )
-
-            patient.save()
-            print(patient)
-
-            return redirect("patients")
-
-        else:
-            print(form.errors)
-            messages.error(request, form.errors)
-
-    return render(request, "app/addpatient.html", {"form": NewPatientForm})
+# def addPatient(request):
+#     form = NewPatientForm
+#     if request.method == "POST":
+#         form = NewPatientForm(request.POST)
+#
+#         print(request.POST["adress"])
+#
+#         if form.is_valid():
+#             print("Formulário Válido")
+#             patient = Patient(id_card_number=request.POST["id_card_number"],
+#                               healthcare_number=request.POST["healthcare_number"], adress=request.POST["adress"],
+#                               phone_number=request.POST["phone_number"], name=request.POST["name"],
+#                               birth_date=request.POST["birthdate"], sex=request.POST["sex"],
+#                               nationality=request.POST["nationality"], )
+#
+#             patient.save()
+#             print(patient)
+#
+#             return redirect("patients")
+#
+#         else:
+#             print(form.errors)
+#             messages.error(request, form.errors)
+#
+#     return render(request, "app/addpatient.html", {"form": NewPatientForm})
 
 
 # MÉDICOS --------------------------------------------------------------------------------------------------------------

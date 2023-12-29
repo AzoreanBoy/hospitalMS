@@ -20,30 +20,77 @@
                 <input type="checkbox" name="urgency" class="">
             </div>
             <div class="my-5 flex flex-row">
-                <label for="patient" class="font-bold mr-5">Patient</label>
+                <label for="patient_use" class="font-bold mr-5">Patient</label>
                 <div class="flex flex-row space-x-5">
                     <div>
-                        <input type="radio" id="html" name="patient" value="new"
+                        <input type="radio" id="html" name="patient_use" value="new"
                                onchange="togglePatientView('new')">
                         <label for="new">New</label>
                     </div>
                     <div>
-                        <input type="radio" id="css" name="patient" value="existing" checked="true"
+                        <input type="radio" id="css" name="patient_use" value="existing" checked="true"
                                onchange="togglePatientView('existing')">
-                        <label for="css">Existing</label>
+                        <label for="existing">Existing</label>
                     </div>
                 </div>
             </div>
 
-            <div id="existingPatient" class="">
+            <div id="existingPatient" class="mx-6 my-10">
                 {{ form.patient }}
             </div>
 
-            <div id="newPatient" class="hidden">
-                New Patient
+            <div id="newPatient" class="hidden grid space-y-5 mx-6 my-10">
+                <div class="flex-row w-full">
+                    <label class="mr-5 font-bold">Name</label>
+                    {{ newPatient.name }}
+                </div>
+
+                <div class="flex-row group">
+                    <label class="mr-5 font-bold">ID Card Number</label>
+                    {{ newPatient.id_card_number }}
+                </div>
+
+                <div class="flex-col group">
+                    <label for="" class="mr-5 font-bold">Healthcare Number</label>
+                    {{ newPatient.healthcare_number }}
+                </div>
+
+                <div class="flex-row">
+                    <label for="birth_date" class="mr-2 font-bold">Birth Date</label>
+                    <input type="date" class="rounded-lg border-2" id="birthdate" name="birthdate" required="True"/>
+                </div>
+
+                <div class="flex-row">
+                    <label class="mr-2 font-bold">Sex</label>
+                    <select name="sex" id="sex" class="rounded-lg border-2">
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="mr-2 font-bold">Nationality</label>
+                    {{ newPatient.nationality }}
+                </div>
+
+                <div class="flex-row">
+                    <label class="font-bold mr-2">Address</label>
+                    {{ newPatient.adress }}
+                </div>
+
+                <div class="flex-row">
+                    <label class="mr-2 font-bold">Contact</label>
+                    {{ newPatient.phone_number }}
+                </div>
             </div>
 
-            <input type="submit" value="Admit">
+
+            <div class="flex justify-center">
+                <div class="my-16 p-4 w-48 flex justify-center bg-blue-teal-gradient rounded-md">
+                    <input type="submit" value="Admit"
+                           class="font-bold uppercase text-xl text-white px-4 hover:cursor-pointer">
+                </div>
+            </div>
 
 
         </form>
@@ -52,17 +99,88 @@
 
 {% block scripts %}
     <script>
+        var existingPatientSelect = document.getElementById('id_patient');
+        existingPatientSelect.setAttribute('required', 'true');
+
+        var sex = document.getElementById("sex")
+        sex.removeAttribute("required")
+        var birthdate = document.getElementById("birthdate")
+        birthdate.removeAttribute("required")
+
+        var newPatientFields = document.querySelectorAll('[id^="patient_"]');
+        newPatientFields.forEach(function (field) {
+            field.removeAttribute('required');
+        });
+
+
         function togglePatientView(selectedValue) {
             var existingPatientDiv = document.getElementById('existingPatient');
             var newPatientDiv = document.getElementById('newPatient');
 
+            // Elementos do Existing Patient
+            var existingPatientSelect = document.getElementById('id_patient');
+
+            // Elementos do New Patient
+            var sex = document.getElementById("sex")
+            var birthdate = document.getElementById("birthdate")
+            var newPatientFields = document.querySelectorAll('[id^="patient_"]');
+
+
             if (selectedValue === 'existing') {
+                console.log("Existing Patient")
                 existingPatientDiv.classList.remove('hidden');
                 newPatientDiv.classList.add('hidden');
+
+                // Colocar o Select como required
+                existingPatientSelect.setAttribute('required', 'true');
+                console.log(existingPatientSelect)
+
+                // Remover o required do New Patient
+                sex.removeAttribute("required")
+                console.log(sex)
+                birthdate.removeAttribute("required")
+                console.log(birthdate)
+                newPatientFields.forEach(function (field) {
+                    field.removeAttribute('required');
+                    console.log(field)
+                });
+
+
             } else {
+                console.log("New Patient")
                 existingPatientDiv.classList.add('hidden');
                 newPatientDiv.classList.remove('hidden');
+
+                // Remover do existing
+                existingPatientSelect.removeAttribute('required');
+                console.log(existingPatientSelect)
+
+                // Atribuir ao sexo e data de nascimento
+                sex.setAttribute("required", 'true')
+                console.log(sex)
+                birthdate.setAttribute("required", 'true')
+                console.log(birthdate)
+                newPatientFields.forEach(function (field) {
+                    field.setAttribute('required', 'true');
+                    console.log(field)
+                });
             }
+
+
+            //var patientSelect = document.getElementById('id_patient')
+            //console.log(patientSelect)
+
+
+            //if (selectedValue === 'existing') {
+            //    existingPatientDiv.classList.remove('hidden');
+            //    newPatientDiv.classList.add('hidden');
+            //    if (!patientSelect.hasAttribute("required")) {
+            //        patientSelect.setAttribute("required", "True")
+            //    }
+            //} else {
+            //    existingPatientDiv.classList.add('hidden');
+            //    newPatientDiv.classList.remove('hidden');
+            //}
         }
     </script>
 
