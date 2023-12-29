@@ -2847,6 +2847,201 @@
     }
   },
   {
+    "model": "admin.logentry",
+    "pk": 220,
+    "fields": {
+      "action_time": "2023-12-29T18:19:41.730Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "30197933",
+      "object_repr": "30197933 -> David Marinho Teixeira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 221,
+    "fields": {
+      "action_time": "2023-12-29T18:19:55.474Z",
+      "user": 1,
+      "content_type": 10,
+      "object_id": "23672096",
+      "object_repr": "23672096 -> Ana Costa Sousa",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 222,
+    "fields": {
+      "action_time": "2023-12-29T18:20:13.901Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "14937214",
+      "object_repr": "14937214 - Doctor Manuel Henriques de Oliveira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 223,
+    "fields": {
+      "action_time": "2023-12-29T18:22:26.641Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "14937214",
+      "object_repr": "14937214 - Doctor José Henriques de Oliveira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 224,
+    "fields": {
+      "action_time": "2023-12-29T18:27:35.498Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "31785905",
+      "object_repr": "31785905 - Doctor Leonor Costa Pereira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 225,
+    "fields": {
+      "action_time": "2023-12-29T18:27:53.747Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "31785905",
+      "object_repr": "31785905 - Doctor Leonor Costa Pereira",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 226,
+    "fields": {
+      "action_time": "2023-12-29T18:32:12.497Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "46239036",
+      "object_repr": "46239036 - Doctor Filipa Santos Costa",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 227,
+    "fields": {
+      "action_time": "2023-12-29T18:35:13.757Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "40767197",
+      "object_repr": "40767197 - Doctor Joana Oliveira Costa",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 228,
+    "fields": {
+      "action_time": "2023-12-29T18:35:45.982Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "38010963",
+      "object_repr": "38010963 - Doctor Lucas Fernandes Pereira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 229,
+    "fields": {
+      "action_time": "2023-12-29T18:35:58.187Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "38010963",
+      "object_repr": "38010963 - Doctor Lucas Fernandes Pereira",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 230,
+    "fields": {
+      "action_time": "2023-12-29T18:36:46.583Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "37500183",
+      "object_repr": "37500183 - Doctor Matilde Sousa Martins",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 231,
+    "fields": {
+      "action_time": "2023-12-29T18:37:17.872Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "33856642",
+      "object_repr": "33856642 - Doctor Nuno Martins Almeida",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 232,
+    "fields": {
+      "action_time": "2023-12-29T18:37:52.321Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "31785905",
+      "object_repr": "31785905 - Doctor Leonor Costa Pereira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 233,
+    "fields": {
+      "action_time": "2023-12-29T18:38:30.977Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "19611552",
+      "object_repr": "19611552 - Doctor Diogo Alves Silva",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 234,
+    "fields": {
+      "action_time": "2023-12-29T18:38:58.162Z",
+      "user": 1,
+      "content_type": 11,
+      "object_id": "14937214",
+      "object_repr": "14937214 - Doctor José Henriques de Oliveira",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Admissions\"]}}]"
+    }
+  },
+  {
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -4487,7 +4682,10 @@
       "nationality": "Portuguese",
       "sex": "m",
       "image": "https://img.freepik.com/fotos-gratis/clinico-geral-com-estetoscopio-sobre-os-ombros-segurando-a-guia-digital-e-olhando-para-a-camera_1098-19297.jpg?w=360&t=st=1703870647~exp=1703871247~hmac=2970bc63059f59dbc0ad8bf5d24bb102d0377cef51386a8642e2b8ee254806f0",
-      "admissions": []
+      "admissions": [
+        1,
+        11
+      ]
     }
   },
   {
@@ -4504,7 +4702,10 @@
       "nationality": "Portuguese",
       "sex": "m",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQon6ioMHeV1KXnwvZeVIAfbAAOz_VLHRZpjGQdcWl6elMFPLp_nmLiZtY4dYTzmar122o&usqp=CAU",
-      "admissions": []
+      "admissions": [
+        3,
+        4
+      ]
     }
   },
   {
@@ -4538,7 +4739,10 @@
       "nationality": "Portuguese",
       "sex": "f",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbfZG8uSZzZvscJhhDUOX_6ZEG59HZL03rZw&usqp=CAU",
-      "admissions": []
+      "admissions": [
+        2,
+        14
+      ]
     }
   },
   {
@@ -4555,7 +4759,10 @@
       "nationality": "Portuguese",
       "sex": "m",
       "image": "https://s3.envato.com/files/354413419/2044.jpg",
-      "admissions": []
+      "admissions": [
+        13,
+        7
+      ]
     }
   },
   {
@@ -4572,7 +4779,10 @@
       "nationality": "Portuguese",
       "sex": "f",
       "image": "https://media.istockphoto.com/id/476295813/photo/doctor-on-white-background-vertical.jpg?s=170667a&w=0&k=20&c=W1h4pz_WL_0ee0tgszyumUR9vX2Pze7CkqPAkO14BeU=",
-      "admissions": []
+      "admissions": [
+        10,
+        12
+      ]
     }
   },
   {
@@ -4589,7 +4799,9 @@
       "nationality": "Portuguese",
       "sex": "m",
       "image": "https://img.freepik.com/fotos-premium/medico-homem-adulto-em-pe-no-escritorio-do-hospital_884296-298.jpg",
-      "admissions": []
+      "admissions": [
+        6
+      ]
     }
   },
   {
@@ -4606,7 +4818,9 @@
       "nationality": "Portuguese",
       "sex": "f",
       "image": "https://t3.ftcdn.net/jpg/03/48/87/16/360_F_348871631_nrEP2SB2tVtZTxMynnwkxjEP3DOjOMu2.jpg",
-      "admissions": []
+      "admissions": [
+        5
+      ]
     }
   },
   {
@@ -4640,7 +4854,10 @@
       "nationality": "Portuguese",
       "sex": "f",
       "image": "https://img.freepik.com/fotos-gratis/bela-jovem-doutora-olhando-a-camera-no-escritorio_1301-7807.jpg?w=360&t=st=1703870524~exp=1703871124~hmac=54dd03c427fcfcef1aed40ebade0077667fa82a35c518190eef2a983674c955c",
-      "admissions": []
+      "admissions": [
+        8,
+        9
+      ]
     }
   },
   {
