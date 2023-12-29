@@ -50,7 +50,11 @@ def admissions(request):
 
 def admisisonDetails(request, id):
     admission = Admission.objects.get(id=id)
-    return render(request, "app/admissiondetails.html", {"admission": admission})
+    exams = Exam.objects.filter(admission=admission).order_by("-exam_date")
+    diagnosis = Diagnosis.objects.filter(admission=admission).order_by("-date")
+    prescriptions = Prescription.objects.filter(admission=admission).order_by("-prescription_date")
+    return render(request, "app/admissiondetails.html",
+                  {"admission": admission, "exams": exams, "diagnosis": diagnosis, "prescriptions": prescriptions})
 
 
 def newAdmission(request):
@@ -73,8 +77,8 @@ def patients(request):
 
 def patientdetails(request, pk):
     patient = Patient.objects.get(id_card_number=pk)
-    print(patient.sex)
-    return render(request, "app/patientdetails.html", {"patient": patient, }, )
+    admissions = Admission.objects.filter(patient=patient).order_by('-adm_date')
+    return render(request, "app/patientdetails.html", {"patient": patient, "admissions": admissions}, )
 
 
 def addPatient(request):
