@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Speciality(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=False)
 
     class Meta:
         # managed = False
@@ -19,7 +19,7 @@ class Speciality(models.Model):
 
 class Department(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, null=False)
 
     class Meta:
         # managed = False
@@ -29,24 +29,11 @@ class Department(models.Model):
         return self.name
 
 
-'''
-class Medication(models.Model):
-    code = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=512)
-
-    class Meta:
-        # managed = False
-        db_table = "medication"
-
-    def __str__(self):
-        return self.name
-
-'''
 
 
 class ExamsCode(models.Model):
     code = models.AutoField(primary_key=True)
-    description = models.CharField(max_length=512)
+    description = models.CharField(max_length=512, null=False)
 
     class Meta:
         # managed = False
@@ -56,18 +43,6 @@ class ExamsCode(models.Model):
         return self.description
 
 
-'''
-class DiagnosisCode(models.Model):
-    id = models.AutoField(primary_key=True)
-    description = models.CharField(max_length=100)
-
-    class Meta:
-        # managed = False
-        db_table = "diagnosis_code"
-
-    def __str__(self):
-        return self.description
-'''
 
 
 # Relational Models
@@ -146,20 +121,6 @@ class Physician(models.Model):
             return "Male"
         else:
             return "Female"
-
-
-'''
-class PhysicianActions(models.Model):
-    admission = models.ForeignKey(Admission, models.DO_NOTHING)
-    physician = models.ForeignKey(Physician, models.DO_NOTHING)
-    action = models.TextField()
-
-    class Meta:
-        unique_together = (("admission", "physician"),)
-     def __str__(self):
-        return f" {self.physician} - {self.admission.patient.id_card_number} -> {self.action}"
-
-'''
 
 
 class Diagnosis(models.Model):

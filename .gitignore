@@ -1,5 +1,5 @@
 # Folders in the app to the system
-app/__pycache__/*
+app/__pycache__/
 app/__pycache__/*.cpython-39.pyc
 app/migrations/
 .idea
@@ -30,6 +30,5 @@ build/
 *.swp
 
 
-*.pyc
 *.pyc
 *.pyc
